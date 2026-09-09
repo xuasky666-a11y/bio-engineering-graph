@@ -1,0 +1,5 @@
+# Cursor 本地配置与技能，不纳入版本库
+.cursor/
+
+# macOS 系统文件
+.DS_Store

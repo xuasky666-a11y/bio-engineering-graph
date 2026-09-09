@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>大连理工大学生物学院 · 生物工程专业图谱</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    /* Inline data for single-file delivery. */
+    /* 数据源：大连理工大学生物学院·生物工程专业 OBE 图谱（_build_bio.py 生成） */
+    window.OBE_RELATION_DATA = {"meta":{"说明":"大连理工大学生物学院·生物工程专业图谱：按 OBE 十概念的出/入关系动词挂载目标实体。中轴 教学单元→组装→专业认知课→支撑→项目化课→直通→岗位；左场景链、右能力/知识链向下拆解至最小颗粒，颗粒经耦合汇入教学单元。向上托为默认阅读视角。","阅读方向":{"默认":"向上托","向上托":"各颗粒度汇总成课直至岗位；展示回聚类动词与中轴（组装、支撑、直通、耦合、供给、聚合、组合、适配、再现、场景单元-专业认知、专业认知-专业认知等）","向下拆":"从岗位沿场景链、能力/知识链拆至最小颗粒；不含项目化课、专业认知课、教学单元；仅分解类动词（提取、需求、拆解、拆分、解构、重构等）"},"实体总数":70,"概念":["岗位","项目化课","专业认知课","教学单元","能力模块","知识单元","知识颗粒","场景模块","场景单元","场景颗粒"],"关系动词":{"岗位":{"出":["提取","需求"],"入":["直通","再现","适配"]},"项目化课":{"出":["直通"],"入":["支撑","适用","应用"]},"专业认知课":{"出":["支撑"],"入":["组装","场景单元-专业认知","专业认知-专业认知"]},"教学单元":{"出":["组装"],"入":["耦合"]},"能力模块":{"出":["适配","重构","应用"],"入":["需求","供给"]},"知识单元":{"出":["供给","解构","专业认知-专业认知"],"入":["重构","聚合"]},"知识颗粒":{"出":["耦合","聚合"],"入":["解构"]},"场景模块":{"出":["再现","拆解","适用"],"入":["提取","供给"]},"场景单元":{"出":["供给","拆分","场景单元-专业认知"],"入":["拆解","组合"]},"场景颗粒":{"出":["耦合","组合"],"入":["拆分"]}}},"data":{"岗位":{"生物制药工程师、发酵工程师、基因工程研发工程师":{"出":{"提取":[{"概念":"场景模块","实体":"重组人胰岛素规模化生产"},{"概念":"场景模块","实体":"青霉素抗生素发酵生产"},{"概念":"场景模块","实体":"重组蛋白表达与纯化"},{"概念":"场景模块","实体":"基因工程疫苗制备"},{"概念":"场景模块","实体":"单克隆抗体制备"}],"需求":[{"概念":"能力模块","实体":"菌种选育与保藏能力"},{"概念":"能力模块","实体":"发酵过程控制能力"},{"概念":"能力模块","实体":"基因克隆与表达能力"},{"概念":"能力模块","实体":"分离纯化能力"},{"概念":"能力模块","实体":"细胞培养与操作能力"}]},"入":{"直通":[{"概念":"项目化课","实体":"生物制药工艺项目实战"},{"概念":"项目化课","实体":"发酵工程生产项目实战"},{"概念":"项目化课","实体":"基因工程产品研发项目实战"}],"再现":[{"概念":"场景模块","实体":"重组人胰岛素规模化生产"},{"概念":"场景模块","实体":"青霉素抗生素发酵生产"},{"概念":"场景模块","实体":"重组蛋白表达与纯化"},{"概念":"场景模块","实体":"基因工程疫苗制备"},{"概念":"场景模块","实体":"单克隆抗体制备"}],"适配":[{"概念":"能力模块","实体":"菌种选育与保藏能力"},{"概念":"能力模块","实体":"发酵过程控制能力"},{"概念":"能力模块","实体":"基因克隆与表达能力"},{"概念":"能力模块","实体":"分离纯化能力"},{"概念":"能力模块","实体":"细胞培养与操作能力"}]}}},"项目化课":{"生物制药工艺项目实战":{"出":{"直通":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}]},"入":{"支撑":[{"概念":"专业认知课","实体":"基因工程"},{"概念":"专业认知课","实体":"发酵工程"},{"概念":"专业认知课","实体":"细胞工程"}],"适用":[{"概念":"场景模块","实体":"重组人胰岛素规模化生产"},{"概念":"场景模块","实体":"基因工程疫苗制备"},{"概念":"场景模块","实体":"单克隆抗体制备"}],"应用":[{"概念":"能力模块","实体":"基因克隆与表达能力"},{"概念":"能力模块","实体":"分离纯化能力"},{"概念":"能力模块","实体":"细胞培养与操作能力"}]}},"发酵工程生产项目实战":{"出":{"直通":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}]},"入":{"支撑":[{"概念":"专业认知课","实体":"发酵工程"}],"适用":[{"概念":"场景模块","实体":"青霉素抗生素发酵生产"}],"应用":[{"概念":"能力模块","实体":"菌种选育与保藏能力"},{"概念":"能力模块","实体":"发酵过程控制能力"}]}},"基因工程产品研发项目实战":{"出":{"直通":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}]},"入":{"支撑":[{"概念":"专业认知课","实体":"基因工程"},{"概念":"专业认知课","实体":"细胞工程"}],"适用":[{"概念":"场景模块","实体":"重组蛋白表达与纯化"},{"概念":"场景模块","实体":"基因工程疫苗制备"}],"应用":[{"概念":"能力模块","实体":"基因克隆与表达能力"},{"概念":"能力模块","实体":"分离纯化能力"}]}}},"专业认知课":{"基因工程":{"出":{"支撑":[{"概念":"项目化课","实体":"基因工程产品研发项目实战"},{"概念":"项目化课","实体":"生物制药工艺项目实战"}]},"入":{"组装":[{"概念":"教学单元","实体":"教学单元1 工具酶与基因操作载体"},{"概念":"教学单元","实体":"教学单元2 基因克隆与重组DNA构建"},{"概念":"教学单元","实体":"教学单元3 基因表达与检测技术"}],"场景单元-专业认知":[{"概念":"场景单元","实体":"重组质粒构建与工程菌转化"},{"概念":"场景单元","实体":"疫苗抗原表达与灭活"}],"专业认知-专业认知":[{"概念":"知识单元","实体":"分子生物学与基因操作原理"},{"概念":"知识单元","实体":"酶学与工具酶知识"}]}},"发酵工程":{"出":{"支撑":[{"概念":"项目化课","实体":"发酵工程生产项目实战"},{"概念":"项目化课","实体":"生物制药工艺项目实战"}]},"入":{"组装":[{"概念":"教学单元","实体":"教学单元4 菌种选育与保藏"},{"概念":"教学单元","实体":"教学单元5 培养基与灭菌技术"},{"概念":"教学单元","实体":"教学单元6 发酵过程控制与放大"}],"场景单元-专业认知":[{"概念":"场景单元","实体":"工程菌高密度发酵生产胰岛素"},{"概念":"场景单元","实体":"青霉素发酵罐过程优化"}],"专业认知-专业认知":[{"概念":"知识单元","实体":"微生物学与菌种知识"},{"概念":"知识单元","实体":"培养基与灭菌原理"},{"概念":"知识单元","实体":"发酵动力学与过程控制"}]}},"细胞工程":{"出":{"支撑":[{"概念":"项目化课","实体":"生物制药工艺项目实战"},{"概念":"项目化课","实体":"基因工程产品研发项目实战"}]},"入":{"组装":[{"概念":"教学单元","实体":"教学单元7 细胞培养技术"},{"概念":"教学单元","实体":"教学单元8 细胞融合与杂交瘤技术"},{"概念":"教学单元","实体":"教学单元9 产物分离与纯化"}],"场景单元-专业认知":[{"概念":"场景单元","实体":"杂交瘤细胞筛选与培养"},{"概念":"场景单元","实体":"目标蛋白分离纯化"}],"专业认知-专业认知":[{"概念":"知识单元","实体":"细胞生物学与培养原理"},{"概念":"知识单元","实体":"免疫学与抗体知识"},{"概念":"知识单元","实体":"分离纯化与下游加工知识"}]}}},"教学单元":{"教学单元1 工具酶与基因操作载体":{"出":{"组装":[{"概念":"专业认知课","实体":"基因工程"}]},"入":{"耦合":[{"概念":"场景颗粒","实体":"质粒酶切与连接"},{"概念":"知识颗粒","实体":"限制性内切酶与连接酶"},{"概念":"知识颗粒","实体":"载体与质粒结构"}]}},"教学单元2 基因克隆与重组DNA构建":{"出":{"组装":[{"概念":"专业认知课","实体":"基因工程"}]},"入":{"耦合":[{"概念":"场景颗粒","实体":"质粒酶切与连接"},{"概念":"场景颗粒","实体":"工程菌转化与筛选"},{"概念":"知识颗粒","实体":"基因克隆原理"},{"概念":"知识颗粒","实体":"PCR与基因扩增"}]}},"教学单元3 基因表达与检测技术":{"出":{"组装":[{"概念":"专业认知课","实体":"基因工程"}]},"入":{"耦合":[{"概念":"场景颗粒","实体":"工程菌转化与筛选"},{"概念":"场景颗粒","实体":"抗原灭活与配制"},{"概念":"知识颗粒","实体":"DNA复制与基因表达"},{"概念":"知识颗粒","实体":"产物质量检测"}]}},"教学单元4 菌种选育与保藏":{"出":{"组装":[{"概念":"专业认知课","实体":"发酵工程"}]},"入":{"耦合":[{"概念":"场景颗粒","实体":"工程菌接种与扩培"},{"概念":"知识颗粒","实体":"微生物分类与生理"},{"概念":"知识颗粒","实体":"菌种生长曲线"},{"概念":"知识颗粒","实体":"菌种保藏方法"}]}},"教学单元5 培养基与灭菌技术":{"出":{"组装":[{"概念":"专业认知课","实体":"发酵工程"}]},"入":{"耦合":[{"概念":"知识颗粒","实体":"培养基组成与配制"},{"概念":"知识颗粒","实体":"灭菌原理与方法"}]}},"教学单元6 发酵过程控制与放大":{"出":{"组装":[{"概念":"专业认知课","实体":"发酵工程"}]},"入":{"耦合":[{"概念":"场景颗粒","实体":"发酵罐参数调控"},{"概念":"知识颗粒","实体":"发酵动力学模型"},{"概念":"知识颗粒","实体":"溶氧与pH控制"},{"概念":"知识颗粒","实体":"发酵放大原理"}]}},"教学单元7 细胞培养技术":{"出":{"组装":[{"概念":"专业认知课","实体":"细胞工程"}]},"入":{"耦合":[{"概念":"场景颗粒","实体":"细胞融合与杂交瘤筛选"},{"概念":"知识颗粒","实体":"细胞结构与功能"},{"概念":"知识颗粒","实体":"细胞培养条件"},{"概念":"知识颗粒","实体":"细胞生长调控"}]}},"教学单元8 细胞融合与杂交瘤技术":{"出":{"组装":[{"概念":"专业认知课","实体":"细胞工程"}]},"入":{"耦合":[{"概念":"场景颗粒","实体":"细胞融合与杂交瘤筛选"},{"概念":"知识颗粒","实体":"抗原抗体反应"},{"概念":"知识颗粒","实体":"单克隆抗体原理"}]}},"教学单元9 产物分离与纯化":{"出":{"组装":[{"概念":"专业认知课","实体":"细胞工程"}]},"入":{"耦合":[{"概念":"场景颗粒","实体":"层析分离纯化操作"},{"概念":"场景颗粒","实体":"产物浓缩冻干与质检"},{"概念":"知识颗粒","实体":"层析分离原理"},{"概念":"知识颗粒","实体":"膜分离技术"},{"概念":"知识颗粒","实体":"浓缩与干燥"}]}}},"能力模块":{"菌种选育与保藏能力":{"出":{"适配":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"重构":[{"概念":"知识单元","实体":"微生物学与菌种知识"}],"应用":[{"概念":"项目化课","实体":"发酵工程生产项目实战"}]},"入":{"需求":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"供给":[{"概念":"知识单元","实体":"微生物学与菌种知识"}]}},"发酵过程控制能力":{"出":{"适配":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"重构":[{"概念":"知识单元","实体":"培养基与灭菌原理"},{"概念":"知识单元","实体":"发酵动力学与过程控制"}],"应用":[{"概念":"项目化课","实体":"发酵工程生产项目实战"}]},"入":{"需求":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"供给":[{"概念":"知识单元","实体":"培养基与灭菌原理"},{"概念":"知识单元","实体":"发酵动力学与过程控制"}]}},"基因克隆与表达能力":{"出":{"适配":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"重构":[{"概念":"知识单元","实体":"分子生物学与基因操作原理"},{"概念":"知识单元","实体":"酶学与工具酶知识"}],"应用":[{"概念":"项目化课","实体":"基因工程产品研发项目实战"},{"概念":"项目化课","实体":"生物制药工艺项目实战"}]},"入":{"需求":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"供给":[{"概念":"知识单元","实体":"分子生物学与基因操作原理"},{"概念":"知识单元","实体":"酶学与工具酶知识"}]}},"分离纯化能力":{"出":{"适配":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"重构":[{"概念":"知识单元","实体":"分离纯化与下游加工知识"}],"应用":[{"概念":"项目化课","实体":"生物制药工艺项目实战"},{"概念":"项目化课","实体":"基因工程产品研发项目实战"}]},"入":{"需求":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"供给":[{"概念":"知识单元","实体":"分离纯化与下游加工知识"}]}},"细胞培养与操作能力":{"出":{"适配":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"重构":[{"概念":"知识单元","实体":"细胞生物学与培养原理"},{"概念":"知识单元","实体":"免疫学与抗体知识"}],"应用":[{"概念":"项目化课","实体":"生物制药工艺项目实战"}]},"入":{"需求":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"供给":[{"概念":"知识单元","实体":"细胞生物学与培养原理"},{"概念":"知识单元","实体":"免疫学与抗体知识"}]}}},"知识单元":{"微生物学与菌种知识":{"出":{"供给":[{"概念":"能力模块","实体":"菌种选育与保藏能力"}],"解构":[{"概念":"知识颗粒","实体":"微生物分类与生理"},{"概念":"知识颗粒","实体":"菌种生长曲线"},{"概念":"知识颗粒","实体":"菌种保藏方法"}],"专业认知-专业认知":[{"概念":"专业认知课","实体":"发酵工程"}]},"入":{"重构":[{"概念":"能力模块","实体":"菌种选育与保藏能力"}],"聚合":[{"概念":"知识颗粒","实体":"微生物分类与生理"},{"概念":"知识颗粒","实体":"菌种生长曲线"},{"概念":"知识颗粒","实体":"菌种保藏方法"}]}},"培养基与灭菌原理":{"出":{"供给":[{"概念":"能力模块","实体":"发酵过程控制能力"}],"解构":[{"概念":"知识颗粒","实体":"培养基组成与配制"},{"概念":"知识颗粒","实体":"灭菌原理与方法"}],"专业认知-专业认知":[{"概念":"专业认知课","实体":"发酵工程"}]},"入":{"重构":[{"概念":"能力模块","实体":"发酵过程控制能力"}],"聚合":[{"概念":"知识颗粒","实体":"培养基组成与配制"},{"概念":"知识颗粒","实体":"灭菌原理与方法"}]}},"发酵动力学与过程控制":{"出":{"供给":[{"概念":"能力模块","实体":"发酵过程控制能力"}],"解构":[{"概念":"知识颗粒","实体":"发酵动力学模型"},{"概念":"知识颗粒","实体":"溶氧与pH控制"},{"概念":"知识颗粒","实体":"发酵放大原理"}],"专业认知-专业认知":[{"概念":"专业认知课","实体":"发酵工程"}]},"入":{"重构":[{"概念":"能力模块","实体":"发酵过程控制能力"}],"聚合":[{"概念":"知识颗粒","实体":"发酵动力学模型"},{"概念":"知识颗粒","实体":"溶氧与pH控制"},{"概念":"知识颗粒","实体":"发酵放大原理"}]}},"分子生物学与基因操作原理":{"出":{"供给":[{"概念":"能力模块","实体":"基因克隆与表达能力"}],"解构":[{"概念":"知识颗粒","实体":"DNA复制与基因表达"},{"概念":"知识颗粒","实体":"基因克隆原理"},{"概念":"知识颗粒","实体":"PCR与基因扩增"}],"专业认知-专业认知":[{"概念":"专业认知课","实体":"基因工程"}]},"入":{"重构":[{"概念":"能力模块","实体":"基因克隆与表达能力"}],"聚合":[{"概念":"知识颗粒","实体":"DNA复制与基因表达"},{"概念":"知识颗粒","实体":"基因克隆原理"},{"概念":"知识颗粒","实体":"PCR与基因扩增"}]}},"酶学与工具酶知识":{"出":{"供给":[{"概念":"能力模块","实体":"基因克隆与表达能力"}],"解构":[{"概念":"知识颗粒","实体":"限制性内切酶与连接酶"},{"概念":"知识颗粒","实体":"载体与质粒结构"}],"专业认知-专业认知":[{"概念":"专业认知课","实体":"基因工程"}]},"入":{"重构":[{"概念":"能力模块","实体":"基因克隆与表达能力"}],"聚合":[{"概念":"知识颗粒","实体":"限制性内切酶与连接酶"},{"概念":"知识颗粒","实体":"载体与质粒结构"}]}},"细胞生物学与培养原理":{"出":{"供给":[{"概念":"能力模块","实体":"细胞培养与操作能力"}],"解构":[{"概念":"知识颗粒","实体":"细胞结构与功能"},{"概念":"知识颗粒","实体":"细胞培养条件"},{"概念":"知识颗粒","实体":"细胞生长调控"}],"专业认知-专业认知":[{"概念":"专业认知课","实体":"细胞工程"}]},"入":{"重构":[{"概念":"能力模块","实体":"细胞培养与操作能力"}],"聚合":[{"概念":"知识颗粒","实体":"细胞结构与功能"},{"概念":"知识颗粒","实体":"细胞培养条件"},{"概念":"知识颗粒","实体":"细胞生长调控"}]}},"免疫学与抗体知识":{"出":{"供给":[{"概念":"能力模块","实体":"细胞培养与操作能力"}],"解构":[{"概念":"知识颗粒","实体":"抗原抗体反应"},{"概念":"知识颗粒","实体":"单克隆抗体原理"}],"专业认知-专业认知":[{"概念":"专业认知课","实体":"细胞工程"}]},"入":{"重构":[{"概念":"能力模块","实体":"细胞培养与操作能力"}],"聚合":[{"概念":"知识颗粒","实体":"抗原抗体反应"},{"概念":"知识颗粒","实体":"单克隆抗体原理"}]}},"分离纯化与下游加工知识":{"出":{"供给":[{"概念":"能力模块","实体":"分离纯化能力"}],"解构":[{"概念":"知识颗粒","实体":"层析分离原理"},{"概念":"知识颗粒","实体":"膜分离技术"},{"概念":"知识颗粒","实体":"浓缩与干燥"},{"概念":"知识颗粒","实体":"产物质量检测"}],"专业认知-专业认知":[{"概念":"专业认知课","实体":"细胞工程"}]},"入":{"重构":[{"概念":"能力模块","实体":"分离纯化能力"}],"聚合":[{"概念":"知识颗粒","实体":"层析分离原理"},{"概念":"知识颗粒","实体":"膜分离技术"},{"概念":"知识颗粒","实体":"浓缩与干燥"},{"概念":"知识颗粒","实体":"产物质量检测"}]}}},"知识颗粒":{"微生物分类与生理":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元4 菌种选育与保藏"}],"聚合":[{"概念":"知识单元","实体":"微生物学与菌种知识"}]},"入":{"解构":[{"概念":"知识单元","实体":"微生物学与菌种知识"}]}},"菌种生长曲线":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元4 菌种选育与保藏"}],"聚合":[{"概念":"知识单元","实体":"微生物学与菌种知识"}]},"入":{"解构":[{"概念":"知识单元","实体":"微生物学与菌种知识"}]}},"菌种保藏方法":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元4 菌种选育与保藏"}],"聚合":[{"概念":"知识单元","实体":"微生物学与菌种知识"}]},"入":{"解构":[{"概念":"知识单元","实体":"微生物学与菌种知识"}]}},"培养基组成与配制":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元5 培养基与灭菌技术"}],"聚合":[{"概念":"知识单元","实体":"培养基与灭菌原理"}]},"入":{"解构":[{"概念":"知识单元","实体":"培养基与灭菌原理"}]}},"灭菌原理与方法":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元5 培养基与灭菌技术"}],"聚合":[{"概念":"知识单元","实体":"培养基与灭菌原理"}]},"入":{"解构":[{"概念":"知识单元","实体":"培养基与灭菌原理"}]}},"发酵动力学模型":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元6 发酵过程控制与放大"}],"聚合":[{"概念":"知识单元","实体":"发酵动力学与过程控制"}]},"入":{"解构":[{"概念":"知识单元","实体":"发酵动力学与过程控制"}]}},"溶氧与pH控制":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元6 发酵过程控制与放大"}],"聚合":[{"概念":"知识单元","实体":"发酵动力学与过程控制"}]},"入":{"解构":[{"概念":"知识单元","实体":"发酵动力学与过程控制"}]}},"发酵放大原理":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元6 发酵过程控制与放大"}],"聚合":[{"概念":"知识单元","实体":"发酵动力学与过程控制"}]},"入":{"解构":[{"概念":"知识单元","实体":"发酵动力学与过程控制"}]}},"DNA复制与基因表达":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元3 基因表达与检测技术"}],"聚合":[{"概念":"知识单元","实体":"分子生物学与基因操作原理"}]},"入":{"解构":[{"概念":"知识单元","实体":"分子生物学与基因操作原理"}]}},"基因克隆原理":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元2 基因克隆与重组DNA构建"}],"聚合":[{"概念":"知识单元","实体":"分子生物学与基因操作原理"}]},"入":{"解构":[{"概念":"知识单元","实体":"分子生物学与基因操作原理"}]}},"PCR与基因扩增":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元2 基因克隆与重组DNA构建"}],"聚合":[{"概念":"知识单元","实体":"分子生物学与基因操作原理"}]},"入":{"解构":[{"概念":"知识单元","实体":"分子生物学与基因操作原理"}]}},"限制性内切酶与连接酶":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元1 工具酶与基因操作载体"}],"聚合":[{"概念":"知识单元","实体":"酶学与工具酶知识"}]},"入":{"解构":[{"概念":"知识单元","实体":"酶学与工具酶知识"}]}},"载体与质粒结构":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元1 工具酶与基因操作载体"}],"聚合":[{"概念":"知识单元","实体":"酶学与工具酶知识"}]},"入":{"解构":[{"概念":"知识单元","实体":"酶学与工具酶知识"}]}},"细胞结构与功能":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元7 细胞培养技术"}],"聚合":[{"概念":"知识单元","实体":"细胞生物学与培养原理"}]},"入":{"解构":[{"概念":"知识单元","实体":"细胞生物学与培养原理"}]}},"细胞培养条件":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元7 细胞培养技术"}],"聚合":[{"概念":"知识单元","实体":"细胞生物学与培养原理"}]},"入":{"解构":[{"概念":"知识单元","实体":"细胞生物学与培养原理"}]}},"细胞生长调控":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元7 细胞培养技术"}],"聚合":[{"概念":"知识单元","实体":"细胞生物学与培养原理"}]},"入":{"解构":[{"概念":"知识单元","实体":"细胞生物学与培养原理"}]}},"抗原抗体反应":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元8 细胞融合与杂交瘤技术"}],"聚合":[{"概念":"知识单元","实体":"免疫学与抗体知识"}]},"入":{"解构":[{"概念":"知识单元","实体":"免疫学与抗体知识"}]}},"单克隆抗体原理":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元8 细胞融合与杂交瘤技术"}],"聚合":[{"概念":"知识单元","实体":"免疫学与抗体知识"}]},"入":{"解构":[{"概念":"知识单元","实体":"免疫学与抗体知识"}]}},"层析分离原理":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元9 产物分离与纯化"}],"聚合":[{"概念":"知识单元","实体":"分离纯化与下游加工知识"}]},"入":{"解构":[{"概念":"知识单元","实体":"分离纯化与下游加工知识"}]}},"膜分离技术":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元9 产物分离与纯化"}],"聚合":[{"概念":"知识单元","实体":"分离纯化与下游加工知识"}]},"入":{"解构":[{"概念":"知识单元","实体":"分离纯化与下游加工知识"}]}},"浓缩与干燥":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元9 产物分离与纯化"}],"聚合":[{"概念":"知识单元","实体":"分离纯化与下游加工知识"}]},"入":{"解构":[{"概念":"知识单元","实体":"分离纯化与下游加工知识"}]}},"产物质量检测":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元3 基因表达与检测技术"}],"聚合":[{"概念":"知识单元","实体":"分离纯化与下游加工知识"}]},"入":{"解构":[{"概念":"知识单元","实体":"分离纯化与下游加工知识"}]}}},"场景模块":{"重组人胰岛素规模化生产":{"出":{"再现":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"拆解":[{"概念":"场景单元","实体":"工程菌高密度发酵生产胰岛素"}],"适用":[{"概念":"项目化课","实体":"生物制药工艺项目实战"}]},"入":{"提取":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"供给":[{"概念":"场景单元","实体":"工程菌高密度发酵生产胰岛素"}]}},"青霉素抗生素发酵生产":{"出":{"再现":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"拆解":[{"概念":"场景单元","实体":"青霉素发酵罐过程优化"}],"适用":[{"概念":"项目化课","实体":"发酵工程生产项目实战"}]},"入":{"提取":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"供给":[{"概念":"场景单元","实体":"青霉素发酵罐过程优化"}]}},"重组蛋白表达与纯化":{"出":{"再现":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"拆解":[{"概念":"场景单元","实体":"重组质粒构建与工程菌转化"},{"概念":"场景单元","实体":"目标蛋白分离纯化"}],"适用":[{"概念":"项目化课","实体":"基因工程产品研发项目实战"}]},"入":{"提取":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"供给":[{"概念":"场景单元","实体":"重组质粒构建与工程菌转化"},{"概念":"场景单元","实体":"目标蛋白分离纯化"}]}},"基因工程疫苗制备":{"出":{"再现":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"拆解":[{"概念":"场景单元","实体":"疫苗抗原表达与灭活"}],"适用":[{"概念":"项目化课","实体":"生物制药工艺项目实战"},{"概念":"项目化课","实体":"基因工程产品研发项目实战"}]},"入":{"提取":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"供给":[{"概念":"场景单元","实体":"疫苗抗原表达与灭活"}]}},"单克隆抗体制备":{"出":{"再现":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"拆解":[{"概念":"场景单元","实体":"杂交瘤细胞筛选与培养"}],"适用":[{"概念":"项目化课","实体":"生物制药工艺项目实战"}]},"入":{"提取":[{"概念":"岗位","实体":"生物制药工程师、发酵工程师、基因工程研发工程师"}],"供给":[{"概念":"场景单元","实体":"杂交瘤细胞筛选与培养"}]}}},"场景单元":{"工程菌高密度发酵生产胰岛素":{"出":{"供给":[{"概念":"场景模块","实体":"重组人胰岛素规模化生产"}],"拆分":[{"概念":"场景颗粒","实体":"工程菌接种与扩培"},{"概念":"场景颗粒","实体":"发酵罐参数调控"}],"场景单元-专业认知":[{"概念":"专业认知课","实体":"发酵工程"}]},"入":{"拆解":[{"概念":"场景模块","实体":"重组人胰岛素规模化生产"}],"组合":[{"概念":"场景颗粒","实体":"工程菌接种与扩培"},{"概念":"场景颗粒","实体":"发酵罐参数调控"}]}},"青霉素发酵罐过程优化":{"出":{"供给":[{"概念":"场景模块","实体":"青霉素抗生素发酵生产"}],"拆分":[{"概念":"场景颗粒","实体":"发酵罐参数调控"}],"场景单元-专业认知":[{"概念":"专业认知课","实体":"发酵工程"}]},"入":{"拆解":[{"概念":"场景模块","实体":"青霉素抗生素发酵生产"}],"组合":[{"概念":"场景颗粒","实体":"发酵罐参数调控"}]}},"重组质粒构建与工程菌转化":{"出":{"供给":[{"概念":"场景模块","实体":"重组蛋白表达与纯化"}],"拆分":[{"概念":"场景颗粒","实体":"质粒酶切与连接"},{"概念":"场景颗粒","实体":"工程菌转化与筛选"}],"场景单元-专业认知":[{"概念":"专业认知课","实体":"基因工程"}]},"入":{"拆解":[{"概念":"场景模块","实体":"重组蛋白表达与纯化"}],"组合":[{"概念":"场景颗粒","实体":"质粒酶切与连接"},{"概念":"场景颗粒","实体":"工程菌转化与筛选"}]}},"疫苗抗原表达与灭活":{"出":{"供给":[{"概念":"场景模块","实体":"基因工程疫苗制备"}],"拆分":[{"概念":"场景颗粒","实体":"抗原灭活与配制"}],"场景单元-专业认知":[{"概念":"专业认知课","实体":"基因工程"}]},"入":{"拆解":[{"概念":"场景模块","实体":"基因工程疫苗制备"}],"组合":[{"概念":"场景颗粒","实体":"抗原灭活与配制"}]}},"杂交瘤细胞筛选与培养":{"出":{"供给":[{"概念":"场景模块","实体":"单克隆抗体制备"}],"拆分":[{"概念":"场景颗粒","实体":"细胞融合与杂交瘤筛选"}],"场景单元-专业认知":[{"概念":"专业认知课","实体":"细胞工程"}]},"入":{"拆解":[{"概念":"场景模块","实体":"单克隆抗体制备"}],"组合":[{"概念":"场景颗粒","实体":"细胞融合与杂交瘤筛选"}]}},"目标蛋白分离纯化":{"出":{"供给":[{"概念":"场景模块","实体":"重组蛋白表达与纯化"}],"拆分":[{"概念":"场景颗粒","实体":"层析分离纯化操作"},{"概念":"场景颗粒","实体":"产物浓缩冻干与质检"}],"场景单元-专业认知":[{"概念":"专业认知课","实体":"细胞工程"}]},"入":{"拆解":[{"概念":"场景模块","实体":"重组蛋白表达与纯化"}],"组合":[{"概念":"场景颗粒","实体":"层析分离纯化操作"},{"概念":"场景颗粒","实体":"产物浓缩冻干与质检"}]}}},"场景颗粒":{"工程菌接种与扩培":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元4 菌种选育与保藏"}],"组合":[{"概念":"场景单元","实体":"工程菌高密度发酵生产胰岛素"}]},"入":{"拆分":[{"概念":"场景单元","实体":"工程菌高密度发酵生产胰岛素"}]}},"发酵罐参数调控":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元6 发酵过程控制与放大"}],"组合":[{"概念":"场景单元","实体":"工程菌高密度发酵生产胰岛素"},{"概念":"场景单元","实体":"青霉素发酵罐过程优化"}]},"入":{"拆分":[{"概念":"场景单元","实体":"工程菌高密度发酵生产胰岛素"},{"概念":"场景单元","实体":"青霉素发酵罐过程优化"}]}},"质粒酶切与连接":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元1 工具酶与基因操作载体"},{"概念":"教学单元","实体":"教学单元2 基因克隆与重组DNA构建"}],"组合":[{"概念":"场景单元","实体":"重组质粒构建与工程菌转化"}]},"入":{"拆分":[{"概念":"场景单元","实体":"重组质粒构建与工程菌转化"}]}},"工程菌转化与筛选":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元2 基因克隆与重组DNA构建"},{"概念":"教学单元","实体":"教学单元3 基因表达与检测技术"}],"组合":[{"概念":"场景单元","实体":"重组质粒构建与工程菌转化"}]},"入":{"拆分":[{"概念":"场景单元","实体":"重组质粒构建与工程菌转化"}]}},"抗原灭活与配制":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元3 基因表达与检测技术"}],"组合":[{"概念":"场景单元","实体":"疫苗抗原表达与灭活"}]},"入":{"拆分":[{"概念":"场景单元","实体":"疫苗抗原表达与灭活"}]}},"细胞融合与杂交瘤筛选":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元7 细胞培养技术"},{"概念":"教学单元","实体":"教学单元8 细胞融合与杂交瘤技术"}],"组合":[{"概念":"场景单元","实体":"杂交瘤细胞筛选与培养"}]},"入":{"拆分":[{"概念":"场景单元","实体":"杂交瘤细胞筛选与培养"}]}},"层析分离纯化操作":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元9 产物分离与纯化"}],"组合":[{"概念":"场景单元","实体":"目标蛋白分离纯化"}]},"入":{"拆分":[{"概念":"场景单元","实体":"目标蛋白分离纯化"}]}},"产物浓缩冻干与质检":{"出":{"耦合":[{"概念":"教学单元","实体":"教学单元9 产物分离与纯化"}],"组合":[{"概念":"场景单元","实体":"目标蛋白分离纯化"}]},"入":{"拆分":[{"概念":"场景单元","实体":"目标蛋白分离纯化"}]}}}}};
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1d1d1f;
+      --ink-2: #424245;
+      --ink-3: #6e6e73;
+      --ink-4: #86868b;
+      --hair: rgba(0, 0, 0, 0.08);
+      --glass: rgba(255, 255, 255, 0.72);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; overflow: hidden; color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at 15% -5%, rgba(8, 145, 178, 0.07), transparent 60%),
+        radial-gradient(1000px 500px at 90% 0%, rgba(5, 150, 105, 0.06), transparent 60%),
+        linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 100%);
+    }
+    .app { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100vh; }
+    .app-header {
+      flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 14px 28px;
+      border-bottom: 0.5px solid var(--hair);
+      background: rgba(251, 251, 253, 0.8); backdrop-filter: saturate(180%) blur(16px);
+      pointer-events: none;
+    }
+    .app-header-left { display: flex; align-items: center; gap: 12px; }
+    .app-header-mark {
+      display: grid; width: 36px; height: 36px; place-items: center; border-radius: 10px;
+      background: linear-gradient(135deg, #0891b2, #059669);
+      box-shadow: 0 2px 8px rgba(8, 145, 178, 0.28);
+    }
+    .app-header-mark svg { width: 20px; height: 20px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; }
+    .app-header-eyebrow { display: block; margin-bottom: 1px; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; color: var(--ink-3); }
+    .app-header h1 { margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); }
+    .app-header-meta { font-size: 12px; font-weight: 400; color: var(--ink-4); }
+
+    .stage-wrap { position: relative; flex: 1 1 auto; min-height: 0; }
+    #stage3d { position: absolute; inset: 0; cursor: default; }
+    #stage3d.dragging { cursor: grabbing; }
+    #stage3d canvas { display: block; }
+
+    .layer-labels { position: absolute; left: 56px; top: 0; height: 100%; pointer-events: none; }
+    .layer-label { position: absolute; left: 0; transform: translateY(-50%); display: flex; align-items: center; gap: 12px; white-space: nowrap; }
+    .layer-label .ldot { width: 12px; height: 12px; border-radius: 50%; flex: 0 0 auto; }
+    .layer-label .lname { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); }
+    .layer-label .lcount { font-size: 13px; font-weight: 500; color: var(--ink-3); padding: 2px 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.8); border: 0.5px solid var(--hair); }
+
+    .focus-panel {
+      position: absolute; right: 28px; top: 28px; width: 360px; max-height: calc(100% - 56px);
+      overflow: auto; padding: 26px 28px; border-radius: 22px;
+      background: var(--glass); backdrop-filter: saturate(180%) blur(22px);
+      border: 0.5px solid var(--hair);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.04);
+      transform: translateX(calc(100% + 48px)); opacity: 0; pointer-events: none;
+      transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1), opacity 260ms ease;
+    }
+    .focus-panel.open { transform: translateX(0); opacity: 1; pointer-events: auto; }
+    .focus-panel h2 { margin: 0 0 2px; font-size: 22px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
+    .focus-panel h3 { margin: 0 0 2px; font-size: 20px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
+    .fp-concept, .np-concept { font-size: 12px; font-weight: 500; letter-spacing: 0.04em; }
+    .fp-hint { margin: 10px 0 0; font-size: 14px; line-height: 1.6; color: var(--ink-3); }
+    .fp-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
+    .fp-stat { padding: 16px 8px; border-radius: 14px; background: rgba(255, 255, 255, 0.6); border: 0.5px solid var(--hair); text-align: center; }
+    .fp-stat b { display: block; font-size: 26px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
+    .fp-stat span { display: block; margin-top: 4px; font-size: 11px; font-weight: 500; color: var(--ink-4); }
+    .fp-layers { margin-top: 16px; border-top: 0.5px solid var(--hair); padding-top: 14px; }
+    .fp-layer { display: flex; align-items: center; gap: 12px; padding: 8px 0; font-size: 14px; font-weight: 500; color: var(--ink-2); }
+    .fp-layer i { width: 10px; height: 10px; border-radius: 50%; }
+    .fp-layer .fp-ln { flex: 1; }
+    .fp-layer .fp-lc { font-size: 13px; font-weight: 500; color: var(--ink-4); }
+    .fp-tip { margin-top: 18px; padding: 12px 14px; border-radius: 12px; background: rgba(0, 0, 0, 0.03); font-size: 13px; line-height: 1.6; color: var(--ink-3); }
+    .np-desc { margin: 12px 0 0; font-size: 14px; line-height: 1.65; color: var(--ink-3); }
+    .np-rel { margin-top: 18px; border-top: 0.5px solid var(--hair); padding-top: 12px; }
+    .np-rel .np-verb { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; }
+    .np-rel ul { margin: 6px 0 0; padding-left: 18px; }
+    .np-rel li { font-size: 14px; line-height: 1.7; color: var(--ink-2); padding: 1px 0; }
+
+    .node-labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .node-label {
+      position: absolute; transform: translate(-50%, -150%); display: flex; align-items: center; gap: 6px;
+      padding: 4px 11px; border-radius: 999px; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(8px);
+      border: 0.5px solid var(--hair); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      font-size: 12px; font-weight: 500; color: var(--ink-2); white-space: nowrap;
+    }
+    .node-label i { width: 7px; height: 7px; border-radius: 50%; flex: 0 0 auto; }
+    .tooltip {
+      position: fixed; z-index: 50; pointer-events: none; padding: 7px 12px; border-radius: 10px;
+      background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(8px); color: var(--ink-2);
+      border: 0.5px solid var(--hair); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      font-size: 13px; font-weight: 500; max-width: 300px; opacity: 0; transition: opacity 120ms ease;
+    }
+    .tooltip.show { opacity: 1; }
+    .hud-hint {
+      position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%);
+      font-size: 12px; color: var(--ink-4); letter-spacing: 0.02em; pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <div class="stage-wrap">
+      <div id="stage3d"></div>
+      <div class="layer-labels" id="layerLabels"></div>
+      <aside class="focus-panel" id="focusPanel"></aside>
+      <div class="node-labels" id="nodeLabels"></div>
+      <div class="tooltip" id="tooltip"></div>
+    </div>
+  </main>
+
+  <script>
+    const raw = window.OBE_RELATION_DATA;
+    const stageEl = document.getElementById("stage3d");
+    const layerLabelsEl = document.getElementById("layerLabels");
+    const focusPanelEl = document.getElementById("focusPanel");
+    const tooltipEl = document.getElementById("tooltip");
+    const nodeLabelsEl = document.getElementById("nodeLabels");
+
+    const LAYER_COLORS = ["#b45309", "#be185d", "#6d28d9", "#0369a1", "#047857"];
+    const LAYER_COLORS_BRIGHT = ["#d97706", "#db2777", "#7c3aed", "#0284c7", "#059669"];
+    const LAYERS = [
+      { name: "培养目标 · 岗位", r: 160 },
+      { name: "项目化课 · 能力 / 场景模块", r: 160 },
+      { name: "专业认知课 · 知识 / 场景单元", r: 160 },
+      { name: "教学单元 · 课程", r: 160 },
+      { name: "知识 / 场景颗粒", r: 160 }
+    ];
+    const LAYER_OF = {
+      "岗位": 0,
+      "项目化课": 1, "场景模块": 1, "能力模块": 1,
+      "专业认知课": 2, "场景单元": 2, "知识单元": 2,
+      "教学单元": 3,
+      "场景颗粒": 4, "知识颗粒": 4
+    };
+    const CONCEPT_DESC = {
+      "岗位": "生物工程毕业生面向的产业岗位集合,是整套培养体系的终点与出口。",
+      "项目化课": "以真实产业项目为载体的综合实战课程,承接能力与场景模块,直通岗位。",
+      "专业认知课": "建立专业核心认知的理论课程,由教学单元组装、支撑项目化课。",
+      "教学单元": "可独立授课的教学章节,由场景颗粒与知识颗粒耦合而成。",
+      "能力模块": "面向岗位的专业能力集合,由知识单元重构而来、向上适配岗位。",
+      "知识单元": "支撑能力的系统化知识块,向下解构为知识颗粒。",
+      "知识颗粒": "最小知识点,备课与考核的最小单元,耦合构成教学单元。",
+      "场景模块": "产业应用场景集合,向上再现岗位需求、适用到项目化课。",
+      "场景单元": "场景模块拆解后的子场景,向上供给场景模块、汇入专业认知课。",
+      "场景颗粒": "最小场景操作,与知识颗粒耦合构成教学单元。"
+    };
+
+    let graph = null, nodesByLayer = [[], [], [], [], []];
+    let selectedId = null, hoverId = null, hoverBall = false;
+    let spin = 0, tiltX = 0.16, speed = 0.00016, animTime = 0;
+    let dragState = null, lastFrame = performance.now();
+    const mouse = { x: 0, y: 0, vx: 0, vy: 0, in: false };
+
+    // ===== Three.js 3D =====
+    let renderer, scene, camera, towerGroup, raycaster, ndc;
+    let nodeMeshes = [], helixMeshes = [], linkGroup = null, linkDots = [], labelAnchors = [], nodeLabelEls = [];
+    const TH = 400, HELIX_EXT = 620, TURNS = 4.2;
+    const layerY3 = [200, 100, 0, -100, -200];
+
+    function nodeId(c, e) { return c + "::" + e; }
+    function extractGraph(source) {
+      const nodes = new Map(), edgeMap = new Map();
+      Object.entries(source.data).forEach(([concept, entities]) => {
+        Object.entries(entities).forEach(([entity, group]) => {
+          const id = nodeId(concept, entity);
+          if (!nodes.has(id)) nodes.set(id, { id, concept, entity, layer: LAYER_OF[concept] ?? 3 });
+          ["出", "入"].forEach((dir) => {
+            Object.entries(group[dir] || {}).forEach(([verb, targets]) => {
+              targets.forEach((t) => {
+                const tid = nodeId(t["概念"], t["实体"]);
+                if (!nodes.has(tid)) nodes.set(tid, { id: tid, concept: t["概念"], entity: t["实体"], layer: LAYER_OF[t["概念"]] ?? 3 });
+                const from = dir === "出" ? id : tid, to = dir === "出" ? tid : id;
+                const key = from + "->" + to + ":" + verb;
+                if (!edgeMap.has(key)) edgeMap.set(key, { key, from, to, verb });
+              });
+            });
+          });
+        });
+      });
+      return { nodes: Array.from(nodes.values()), edges: Array.from(edgeMap.values()) };
+    }
+    function layout() {
+      nodesByLayer = [[], [], [], [], []];
+      graph.nodes.forEach((n) => nodesByLayer[n.layer].push(n));
+      nodesByLayer.forEach((list) => {
+        list.sort((a, b) => a.concept.localeCompare(b.concept, "zh") || a.entity.localeCompare(b.entity, "zh"));
+        const N = list.length;
+        list.forEach((n, i) => { n.theta0 = N === 1 ? -Math.PI / 2 : (i / N) * Math.PI * 2 - Math.PI / 2; });
+      });
+    }
+    function helixR(y) {
+      return 170;
+    }
+    function initThree() {
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setSize(stageEl.clientWidth, stageEl.clientHeight);
+      stageEl.appendChild(renderer.domElement);
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(40, stageEl.clientWidth / stageEl.clientHeight, 1, 5000);
+      camera.position.set(0, 0, 1050);
+      scene.add(new THREE.HemisphereLight(0xffffff, 0xe8eaed, 0.95));
+      const dl = new THREE.DirectionalLight(0xffffff, 0.9); dl.position.set(260, 460, 420); scene.add(dl);
+      const dl2 = new THREE.DirectionalLight(0xdfe8ff, 0.4); dl2.position.set(-320, -180, 260); scene.add(dl2);
+      towerGroup = new THREE.Group();
+      scene.add(towerGroup);
+      raycaster = new THREE.Raycaster();
+      ndc = new THREE.Vector2();
+      buildTower();
+    }
+    function tubeFrom(fn, color, radius) {
+      const pts = [];
+      for (let i = 0; i <= 220; i++) pts.push(fn(i / 220));
+      const curve = new THREE.CatmullRomCurve3(pts);
+      const geo = new THREE.TubeGeometry(curve, 260, radius, 12, false);
+      const mat = new THREE.MeshStandardMaterial({ color, metalness: 0.25, roughness: 0.32, emissive: color, emissiveIntensity: 0.12 });
+      return new THREE.Mesh(geo, mat);
+    }
+    function buildTower() {
+      // 双螺线管
+      const helixA = (t) => { const y = -HELIX_EXT + t * 2 * HELIX_EXT; const r = helixR(y); const th = t * TURNS * Math.PI * 2; return new THREE.Vector3(r * Math.cos(th), y, r * Math.sin(th)); };
+      const helixB = (t) => { const y = -HELIX_EXT + t * 2 * HELIX_EXT; const r = helixR(y); const th = t * TURNS * Math.PI * 2 + Math.PI; return new THREE.Vector3(r * Math.cos(th), y, r * Math.sin(th)); };
+      const tubeA = tubeFrom(helixA, 0x2563eb, 5.0);
+      const tubeB = tubeFrom(helixB, 0x7c3aed, 5.0);
+      helixMeshes = [tubeA, tubeB];
+      towerGroup.add(tubeA); towerGroup.add(tubeB);
+      // 碱基横档
+      const rungMat = new THREE.LineBasicMaterial({ color: 0x9aa4b0, transparent: true, opacity: 0.45 });
+      for (let i = 8; i < 220; i += 8) {
+        const t = i / 220;
+        const g = new THREE.BufferGeometry().setFromPoints([helixA(t), helixB(t)]);
+        towerGroup.add(new THREE.Line(g, rungMat));
+      }
+      // 层环 + 层盘
+      LAYERS.forEach((L, li) => {
+        const ring = new THREE.Mesh(new THREE.TorusGeometry(L.r, 1.6, 10, 80), new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.1, roughness: 0.4, transparent: true, opacity: 0.9, emissive: 0xffffff, emissiveIntensity: 0.15 }));
+        ring.rotation.x = Math.PI / 2; ring.position.y = layerY3[li];
+        towerGroup.add(ring);
+        const disc = new THREE.Mesh(new THREE.CircleGeometry(L.r, 56), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.06, side: THREE.DoubleSide }));
+        disc.rotation.x = -Math.PI / 2; disc.position.y = layerY3[li];
+        towerGroup.add(disc);
+        labelAnchors[li] = new THREE.Vector3(0, layerY3[li], 0);
+      });
+      // 节点球
+      graph.nodes.forEach((n) => {
+        const base = 6.2;
+        const col = new THREE.Color(LAYER_COLORS[n.layer]);
+        const mesh = new THREE.Mesh(new THREE.SphereGeometry(base, 22, 18), new THREE.MeshStandardMaterial({ color: col, metalness: 0.2, roughness: 0.35, emissive: col, emissiveIntensity: 0.18 }));
+        const r = LAYERS[n.layer].r;
+        mesh.position.set(r * Math.cos(n.theta0), layerY3[n.layer], r * Math.sin(n.theta0));
+        mesh.userData = { id: n.id, base };
+        towerGroup.add(mesh);
+        nodeMeshes.push(mesh);
+        n.mesh = mesh;
+      });
+      // 漂浮微粒
+      const pGeo = new THREE.BufferGeometry();
+      const pPos = new Float32Array(60 * 3);
+      for (let i = 0; i < 60; i++) {
+        pPos[i * 3] = (Math.sin(i * 127.1) * 43758.5453 % 1) * 700 - 350;
+        pPos[i * 3 + 1] = (Math.sin(i * 311.7) * 12543.21 % 1) * 800 - 400;
+        pPos[i * 3 + 2] = (Math.sin(i * 74.7) * 269.87 % 1) * 500 - 250;
+      }
+      pGeo.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
+      scene.add(new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0xaab4bf, size: 2.2, transparent: true, opacity: 0.4 })));
+    }
+    function rebuildLinks() {
+      if (linkGroup) { towerGroup.remove(linkGroup); linkGroup = null; }
+      linkDots = [];
+      rebuildNodeLabels();
+      if (!selectedId) return;
+      linkGroup = new THREE.Group();
+      graph.edges.forEach((e) => {
+        if (e.from !== selectedId && e.to !== selectedId) return;
+        const a = graph.nodeIndex.get(e.from).mesh, b = graph.nodeIndex.get(e.to).mesh;
+        if (!a || !b) return;
+        const col = new THREE.Color(LAYER_COLORS_BRIGHT[graph.nodeIndex.get(selectedId).layer]);
+        linkGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([a.position, b.position]), new THREE.LineBasicMaterial({ color: col, transparent: true, opacity: 0.75 })));
+        const dot = new THREE.Mesh(new THREE.SphereGeometry(1.6, 10, 8), new THREE.MeshBasicMaterial({ color: col }));
+        linkGroup.add(dot);
+        linkDots.push({ dot, a: a.position, b: b.position, t: Math.random() });
+      });
+      towerGroup.add(linkGroup);
+    }
+    function rebuildNodeLabels() {
+      nodeLabelsEl.innerHTML = "";
+      nodeLabelEls = [];
+      if (!selectedId) return;
+      const rel = new Set();
+      graph.edges.forEach((e) => { if (e.from === selectedId) rel.add(e.to); if (e.to === selectedId) rel.add(e.from); });
+      rel.forEach((id) => {
+        const n = graph.nodeIndex.get(id);
+        if (!n || !n.mesh) return;
+        const el = document.createElement("div");
+        el.className = "node-label";
+        el.innerHTML = '<i style="background:' + LAYER_COLORS_BRIGHT[n.layer] + '"></i>' + n.entity;
+        nodeLabelsEl.appendChild(el);
+        nodeLabelEls.push({ el, mesh: n.mesh });
+      });
+    }
+    function updateNodeLabelPos() {
+      if (!nodeLabelEls.length) return;
+      const w = stageEl.clientWidth, h = stageEl.clientHeight;
+      const v = new THREE.Vector3();
+      nodeLabelEls.forEach((it) => {
+        v.copy(it.mesh.position);
+        towerGroup.localToWorld(v);
+        v.project(camera);
+        it.el.style.left = ((v.x + 1) / 2 * w).toFixed(0) + "px";
+        it.el.style.top = ((1 - v.y) / 2 * h).toFixed(0) + "px";
+      });
+    }
+    let layerLabelDivs = [];
+    function updateLayerLabelsPos() {
+      const h = stageEl.clientHeight;
+      if (!layerLabelDivs.length) {
+        let html = "";
+        LAYERS.forEach((L, li) => {
+          html += '<div class="layer-label"><i class="ldot" style="background:' + LAYER_COLORS_BRIGHT[li] + '"></i><span class="lname">' + L.name + '</span><span class="lcount">' + nodesByLayer[li].length + '</span></div>';
+        });
+        layerLabelsEl.innerHTML = html;
+        layerLabelDivs = Array.from(layerLabelsEl.children);
+      }
+      LAYERS.forEach((L, li) => {
+        const v = labelAnchors[li].clone();
+        towerGroup.localToWorld(v);
+        v.project(camera);
+        layerLabelDivs[li].style.top = ((1 - v.y) / 2 * h).toFixed(0) + "px";
+      });
+    }
+    function pickAt(clientX, clientY) {
+      const rect = stageEl.getBoundingClientRect();
+      ndc.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+      ndc.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(ndc, camera);
+      const hits = raycaster.intersectObjects(nodeMeshes);
+      return hits.length ? hits[0].object.userData.id : null;
+    }
+    function tick(now) {
+      const dt = Math.min(40, now - lastFrame);
+      lastFrame = now; animTime = now;
+      if (!dragState) spin += speed * dt * (hoverBall ? 0.15 : 1);
+      towerGroup.rotation.y = spin;
+      towerGroup.rotation.x = tiltX;
+      // hover 射线
+      let hid = null;
+      if (mouse.in && !dragState) hid = pickAt(mouse.vx, mouse.vy);
+      const hb = !!hid;
+      if (hb !== hoverBall || hid !== hoverId) {
+        hoverBall = hb; hoverId = hid;
+        nodeMeshes.forEach((m) => {
+          const isH = m.userData.id === hoverId, isS = m.userData.id === selectedId;
+          m.scale.setScalar(isS ? 1.55 : isH ? 1.35 : 1);
+          m.material.emissiveIntensity = isS ? 0.5 : isH ? 0.4 : 0.18;
+        });
+      }
+      if (hid && hid !== selectedId) {
+        const n = graph.nodeIndex.get(hid);
+        tooltipEl.textContent = n.concept + ":" + n.entity;
+        tooltipEl.classList.add("show");
+        tooltipEl.style.left = mouse.vx + 14 + "px";
+        tooltipEl.style.top = mouse.vy + 14 + "px";
+      } else tooltipEl.classList.remove("show");
+      // 飞线光点
+      linkDots.forEach((d) => { d.t = (d.t + dt * 0.0007) % 1; d.dot.position.lerpVectors(d.a, d.b, d.t); });
+      updateLayerLabelsPos();
+      updateNodeLabelPos();
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    }
+    function onResize() {
+      const w = stageEl.clientWidth, h = stageEl.clientHeight;
+      camera.aspect = w / h; camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+
+    // ===== 弹窗(苹果风) =====
+    function renderFocusPanel() {
+      if (!selectedId) {
+        let html = '<h2>生物工程专业图谱 · 总览</h2><div class="fp-concept" style="color:#047857">DUT · SCHOOL OF BIOENGINEERING</div>'
+          + '<div class="fp-stats">'
+          + '<div class="fp-stat"><b>' + nodesByLayer[0].length + '</b><span>培养目标</span></div>'
+          + '<div class="fp-stat"><b>' + nodesByLayer[1].length + '</b><span>项目化课·模块</span></div>'
+          + '<div class="fp-stat"><b>' + nodesByLayer[2].length + '</b><span>认知课·单元</span></div>'
+          + '<div class="fp-stat"><b>' + nodesByLayer[3].length + '</b><span>教学单元</span></div>'
+          + '<div class="fp-stat"><b>' + nodesByLayer[4].length + '</b><span>知识/场景颗粒</span></div>'
+          + '<div class="fp-stat"><b>' + graph.edges.length + '</b><span>关系连线</span></div>'
+          + '</div><div class="fp-layers">';
+        LAYERS.forEach((L, li) => {
+          html += '<div class="fp-layer"><i style="background:' + LAYER_COLORS_BRIGHT[li] + '"></i><span class="fp-ln">' + L.name + '</span><span class="fp-lc">' + nodesByLayer[li].length + '</span></div>';
+        });
+        html += '</div><div class="fp-tip">点击螺旋上任意节点,查看其含义与上下游关系;拖拽可旋转视角,悬停节点可预览其联系。</div>';
+        focusPanelEl.innerHTML = html;
+        return;
+      }
+      const n = graph.nodeIndex.get(selectedId);
+      const up = {}, down = {};
+      graph.edges.forEach((e) => {
+        if (e.to === selectedId) (up[e.verb] ||= []).push(graph.nodeIndex.get(e.from));
+        if (e.from === selectedId) (down[e.verb] ||= []).push(graph.nodeIndex.get(e.to));
+      });
+      let html = '<h3>' + n.entity + '</h3><div class="np-concept" style="color:' + LAYER_COLORS_BRIGHT[n.layer] + '">' + n.concept + ' · L' + n.layer + '</div>'
+        + '<p class="np-desc">' + (CONCEPT_DESC[n.concept] || "") + '</p>';
+      const relBlock = (title, obj) => {
+        let s = "";
+        Object.entries(obj).forEach(([verb, list]) => {
+          s += '<div class="np-rel"><div class="np-verb" style="color:' + LAYER_COLORS_BRIGHT[n.layer] + '">' + title + ' · ' + verb + '</div><ul>' + list.map((t) => "<li>" + t.entity + "</li>").join("") + "</ul></div>";
+        });
+        return s;
+      };
+      html += relBlock("上游(入)", up) + relBlock("下游(出)", down);
+      html += '<div class="fp-tip">点击空白处返回总览。</div>';
+      focusPanelEl.innerHTML = html;
+    }
+    function openPopover(id) { selectedId = id; rebuildLinks(); renderFocusPanel(); }
+    function closePopover() { selectedId = null; rebuildLinks(); renderFocusPanel(); }
+
+    // ===== 交互 =====
+    stageEl.addEventListener("pointerdown", (e) => {
+      dragState = { x: e.clientX, y: e.clientY, spin, tiltX };
+      stageEl.classList.add("dragging");
+      stageEl.setPointerCapture(e.pointerId);
+    });
+    stageEl.addEventListener("pointermove", (e) => {
+      mouse.vx = e.clientX; mouse.vy = e.clientY; mouse.in = true;
+      const rect = stageEl.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left; mouse.y = e.clientY - rect.top;
+      if (!dragState) return;
+      spin = dragState.spin + (e.clientX - dragState.x) * 0.005;
+      tiltX = Math.max(0.05, Math.min(0.4, dragState.tiltX + (e.clientY - dragState.y) * 0.0012));
+    });
+    stageEl.addEventListener("pointerup", (e) => {
+      if (dragState) {
+        const dx = e.clientX - dragState.x, dy = e.clientY - dragState.y;
+        if (dx * dx + dy * dy < 25) {
+          const id = pickAt(e.clientX, e.clientY);
+          if (id) openPopover(id); else closePopover();
+        }
+      }
+      dragState = null; stageEl.classList.remove("dragging");
+    });
+    stageEl.addEventListener("mouseleave", () => { mouse.in = false; });
+    function pickHelix(clientX, clientY) {
+      const rect = stageEl.getBoundingClientRect();
+      ndc.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+      ndc.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(ndc, camera);
+      return raycaster.intersectObjects(helixMeshes).length > 0;
+    }
+    stageEl.addEventListener("mousemove", (e) => {
+      mouse.vx = e.clientX; mouse.vy = e.clientY; mouse.in = true;
+      const rect = stageEl.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left; mouse.y = e.clientY - rect.top;
+      const id = pickAt(e.clientX, e.clientY);
+      stageEl.style.cursor = id ? "pointer" : (pickHelix(e.clientX, e.clientY) ? "grab" : "default");
+    });
+    window.addEventListener("resize", onResize);
+
+    function init() {
+      if (!raw || !raw.data) throw new Error("OBE_RELATION_DATA 缺失");
+      graph = extractGraph(raw);
+      graph.nodeIndex = new Map(graph.nodes.map((n) => [n.id, n]));
+      layout();
+      initThree();
+      selectedId = null;
+      focusPanelEl.classList.add("open");
+      renderFocusPanel();
+      requestAnimationFrame(tick);
+    }
+    init();
+  </script>
+</body>
+</html>
