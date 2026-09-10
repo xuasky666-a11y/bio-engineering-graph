@@ -50,48 +50,53 @@
     .app-header-meta { font-size: 12px; font-weight: 400; color: var(--ink-4); }
 
     .stage-wrap { position: relative; flex: 1 1 auto; min-height: 0; }
-    body.v2 { background: linear-gradient(160deg, #f4f8fb 0%, #dce9f2 45%, #eef5f9 100%); }
-    .ver-switch {
-      position: absolute; left: 24px; top: 20px; z-index: 30; display: flex; gap: 8px; padding: 4px; border-radius: 999px;
-      background: rgba(255, 255, 255, 0.55); backdrop-filter: blur(12px);
-      border: 0.5px solid var(--hair); box-shadow: 0 2px 10px rgba(31, 80, 130, 0.08);
-    }
-    .ver-btn { border: none; background: rgba(255, 255, 255, 0.92); padding: 7px 18px; border-radius: 999px; font-size: 13px; font-weight: 500; color: #5a6b7d; cursor: pointer; font-family: inherit; box-shadow: 0 1px 4px rgba(31, 80, 130, 0.08); }
-    .ver-btn.active { background: linear-gradient(135deg, #2196f3, #45afff); color: #fff; font-weight: 600; box-shadow: 0 2px 8px rgba(33, 150, 243, 0.35); }
+    body { background: linear-gradient(160deg, #f4f8fb 0%, #dce9f2 45%, #eef5f9 100%); }
     #stage3d { position: absolute; inset: 0; cursor: default; }
     #stage3d.dragging { cursor: grabbing; }
     #stage3d canvas { display: block; }
 
-    .layer-labels { position: absolute; left: 56px; top: 0; height: 100%; pointer-events: none; }
-    .layer-label { position: absolute; left: 0; transform: translateY(-50%); display: flex; align-items: center; gap: 12px; white-space: nowrap; }
-    .layer-label .ldot { width: 12px; height: 12px; border-radius: 50%; flex: 0 0 auto; }
-    .layer-label .lname { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); }
-    .layer-label .lcount { font-size: 13px; font-weight: 500; color: var(--ink-3); padding: 2px 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.8); border: 0.5px solid var(--hair); }
+    .layer-labels { position: absolute; left: 28px; top: 50%; transform: translateY(-50%) scale(1.2); transform-origin: left center; width: 210px; height: 470px; pointer-events: none; }
+    .layer-hex {
+      position: absolute; width: 98px; height: 112px; pointer-events: auto; cursor: pointer;
+      clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+      background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(10px);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+      transition: background 200ms ease, transform 200ms ease;
+    }
+    .layer-hex:hover { transform: scale(1.04); }
+    .layer-hex.sel { background: linear-gradient(149deg, rgba(30, 112, 254, 0.92), rgba(10, 190, 255, 0.92)); }
+    .layer-hex .lname { font-size: 13px; font-weight: 600; color: rgba(0, 0, 0, 0.7); text-align: center; line-height: 1.25; padding: 0 10px; }
+    .layer-hex .lcount { font-size: 18px; font-weight: 800; color: var(--hex-accent, #247bfe); }
+    .layer-hex.sel .lname { color: #fff; font-weight: 800; }
+    .layer-hex.sel .lcount { color: #fff; }
+    .layer-hex.ghost { background: rgba(255, 255, 255, 0.5); pointer-events: none; }
 
     .focus-panel {
-      position: absolute; right: 28px; top: 50%; width: 360px; max-height: calc(100% - 56px);
-      overflow: auto; padding: 26px 28px; border-radius: 22px;
-      background: var(--glass); backdrop-filter: saturate(180%) blur(22px);
-      border: 0.5px solid var(--hair);
-      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.04);
-      transform: translate(calc(100% + 48px), -50%); opacity: 0; pointer-events: none;
+      position: absolute; right: 28px; top: 50%; width: 420px; max-height: calc(100% - 56px);
+      overflow: auto; padding: 30px; border-radius: 30px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.97) 18%, rgba(255, 255, 255, 0.96) 80%, rgba(255, 255, 255, 0.98) 100%);
+      backdrop-filter: blur(22px);
+      border: 0.5px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.10);
+      transform: translate(calc(100% + 48px), -50%) scale(0.8); opacity: 0; pointer-events: none;
+      transform-origin: right center;
       transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1), opacity 260ms ease;
     }
-    .focus-panel.open { transform: translate(0, -50%); opacity: 1; pointer-events: auto; }
+    .focus-panel.open { transform: translate(0, -50%) scale(0.8); opacity: 1; pointer-events: auto; }
     .focus-panel h2 { margin: 0 0 2px; font-size: 22px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
     .focus-panel h3 { margin: 0 0 2px; font-size: 20px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
     .fp-concept, .np-concept { font-size: 12px; font-weight: 500; letter-spacing: 0.04em; }
     .fp-hint { margin: 10px 0 0; font-size: 14px; line-height: 1.6; color: var(--ink-3); }
     .fp-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
-    .fp-stat { padding: 16px 8px; border-radius: 14px; background: rgba(255, 255, 255, 0.6); border: 0.5px solid var(--hair); text-align: center; }
+    .fp-stat { padding: 16px 8px; border-radius: 14px; background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.9)); border: 0.5px solid rgba(0, 0, 0, 0.06); text-align: center; }
     .fp-stat b { display: block; font-size: 26px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
     .fp-stat span { display: block; margin-top: 4px; font-size: 11px; font-weight: 500; color: var(--ink-4); }
     .fp-layers { margin-top: 16px; border-top: 0.5px solid var(--hair); padding-top: 14px; }
-    .fp-layer { display: flex; align-items: center; gap: 12px; padding: 8px 0; font-size: 14px; font-weight: 500; color: var(--ink-2); }
-    .fp-layer i { width: 10px; height: 10px; border-radius: 50%; }
+    .fp-layer { display: flex; align-items: center; gap: 12px; padding: 10px 0; font-size: 14px; font-weight: 500; color: #424245; }
+    .fp-layer i { width: 10px; height: 10px; border-radius: 5px; flex: 0 0 auto; }
     .fp-layer .fp-ln { flex: 1; }
-    .fp-layer .fp-lc { font-size: 13px; font-weight: 500; color: var(--ink-4); }
-    .fp-tip { margin-top: 18px; padding: 12px 14px; border-radius: 12px; background: rgba(0, 0, 0, 0.03); font-size: 13px; line-height: 1.6; color: var(--ink-3); }
+    .fp-layer .fp-lc { font-size: 13px; font-weight: 500; color: #86868b; }
+    .fp-tip { margin-top: 18px; padding: 16px; border-radius: 12px; background: #e9f2ff; font-size: 13px; line-height: 1.6; color: #6e6e73; }
     .np-desc { margin: 12px 0 0; font-size: 14px; line-height: 1.65; color: var(--ink-3); }
     .np-rel { margin-top: 18px; border-top: 0.5px solid var(--hair); padding-top: 12px; }
     .np-rel .np-verb { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; }
@@ -129,7 +134,6 @@
 <body>
   <main class="app">
     <div class="stage-wrap">
-      <div class="ver-switch" id="verSwitch"><button class="ver-btn" data-v="1">版本二</button><button class="ver-btn active" data-v="2">版本一</button></div>
       <div id="stage3d"></div>
       <div class="layer-labels" id="layerLabels"></div>
       <aside class="focus-panel" id="focusPanel"></aside>
@@ -167,12 +171,8 @@
 
     // ===== Three.js 3D =====
     let renderer, scene, camera, towerGroup, raycaster, ndc;
-    let nodeMeshesV1 = [], nodeMeshesV2 = [], helixMeshes = [], helixMeshesV2 = [], linkGroup = null, linkDots = [], labelAnchors = [], nodeLabelEls = [];
-    let groupV1 = null, groupV2 = null, currentVersion = 1;
-    function curMesh(n) { return currentVersion === 1 ? n.meshV1 : n.meshV2; }
-    function curNodeMeshes() { return currentVersion === 1 ? nodeMeshesV1 : nodeMeshesV2; }
-    function curHelix() { return currentVersion === 1 ? helixMeshes : helixMeshesV2; }
-    const TH = 400, HELIX_EXT = 620, TURNS = 4.2;
+    let nodeMeshes = [], helixMeshes = [], linkGroup = null, linkDots = [], labelAnchors = [], nodeLabelEls = [];
+    let selectedLayer = null;
     const layerY3 = [200, 100, 0, -100, -200];
 
     function nodeId(c, e) { return c + "::" + e; }
@@ -197,9 +197,6 @@
         list.forEach((n, i) => { n.theta0 = N === 1 ? -Math.PI / 2 : (i / N) * Math.PI * 2 - Math.PI / 2; });
       });
     }
-    function helixR(y) {
-      return 170;
-    }
     function initThree() {
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -213,75 +210,9 @@
       const dl2 = new THREE.DirectionalLight(0xdfe8ff, 0.4); dl2.position.set(-320, -180, 260); scene.add(dl2);
       towerGroup = new THREE.Group();
       scene.add(towerGroup);
-      groupV1 = new THREE.Group(); groupV2 = new THREE.Group();
-      towerGroup.add(groupV1); towerGroup.add(groupV2);
       raycaster = new THREE.Raycaster();
       ndc = new THREE.Vector2();
-      buildTower();
       buildV2();
-      groupV2.visible = false;
-    }
-    function tubeFrom(fn, color, radius) {
-      const pts = [];
-      for (let i = 0; i <= 220; i++) pts.push(fn(i / 220));
-      const curve = new THREE.CatmullRomCurve3(pts);
-      const geo = new THREE.TubeGeometry(curve, 260, radius, 12, false);
-      const mat = new THREE.MeshStandardMaterial({ color, metalness: 0.25, roughness: 0.32, emissive: color, emissiveIntensity: 0.12 });
-      return new THREE.Mesh(geo, mat);
-    }
-    function buildTower() {
-      // 双螺线管
-      const helixA = (t) => { const y = -HELIX_EXT + t * 2 * HELIX_EXT; const r = helixR(y); const th = t * TURNS * Math.PI * 2; return new THREE.Vector3(r * Math.cos(th), y, r * Math.sin(th)); };
-      const helixB = (t) => { const y = -HELIX_EXT + t * 2 * HELIX_EXT; const r = helixR(y); const th = t * TURNS * Math.PI * 2 + Math.PI; return new THREE.Vector3(r * Math.cos(th), y, r * Math.sin(th)); };
-      const tubeA = tubeFrom(helixA, 0x2563eb, 5.0);
-      const tubeB = tubeFrom(helixB, 0x7c3aed, 5.0);
-      helixMeshes = [tubeA, tubeB];
-      groupV1.add(tubeA); groupV1.add(tubeB);
-      // 碱基横档(白色细圆柱,与层环同材质感)
-      const rungMat = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.1, roughness: 0.4, transparent: true, opacity: 0.9, emissive: 0xffffff, emissiveIntensity: 0.12 });
-      const YAXIS = new THREE.Vector3(0, 1, 0);
-      for (let i = 8; i < 220; i += 8) {
-        const t = i / 220;
-        const a = helixA(t), b = helixB(t);
-        const dir = new THREE.Vector3().subVectors(b, a);
-        const len = dir.length();
-        const rung = new THREE.Mesh(new THREE.CylinderGeometry(1.5, 1.5, len, 8), rungMat);
-        rung.position.copy(a).add(b).multiplyScalar(0.5);
-        rung.quaternion.setFromUnitVectors(YAXIS, dir.normalize());
-        groupV1.add(rung);
-      }
-      // 层环 + 层盘
-      LAYERS.forEach((L, li) => {
-        const ring = new THREE.Mesh(new THREE.TorusGeometry(L.r, 1.6, 10, 80), new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.1, roughness: 0.4, transparent: true, opacity: 0.9, emissive: 0xffffff, emissiveIntensity: 0.15 }));
-        ring.rotation.x = Math.PI / 2; ring.position.y = layerY3[li];
-        groupV1.add(ring);
-        const disc = new THREE.Mesh(new THREE.CircleGeometry(L.r, 56), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.06, side: THREE.DoubleSide }));
-        disc.rotation.x = -Math.PI / 2; disc.position.y = layerY3[li];
-        groupV1.add(disc);
-        labelAnchors[li] = new THREE.Vector3(0, layerY3[li], 0);
-      });
-      // 节点球
-      graph.nodes.forEach((n) => {
-        const base = 6.2;
-        const col = new THREE.Color(LAYER_COLORS[n.layer]);
-        const mesh = new THREE.Mesh(new THREE.SphereGeometry(base, 22, 18), new THREE.MeshStandardMaterial({ color: col, metalness: 0.2, roughness: 0.35, emissive: col, emissiveIntensity: 0.18 }));
-        const r = LAYERS[n.layer].r;
-        mesh.position.set(r * Math.cos(n.theta0), layerY3[n.layer], r * Math.sin(n.theta0));
-        mesh.userData = { id: n.id, base };
-        groupV1.add(mesh);
-        nodeMeshesV1.push(mesh);
-        n.meshV1 = mesh;
-      });
-      // 漂浮微粒
-      const pGeo = new THREE.BufferGeometry();
-      const pPos = new Float32Array(60 * 3);
-      for (let i = 0; i < 60; i++) {
-        pPos[i * 3] = (Math.sin(i * 127.1) * 43758.5453 % 1) * 700 - 350;
-        pPos[i * 3 + 1] = (Math.sin(i * 311.7) * 12543.21 % 1) * 800 - 400;
-        pPos[i * 3 + 2] = (Math.sin(i * 74.7) * 269.87 % 1) * 500 - 250;
-      }
-      pGeo.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
-      scene.add(new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0xaab4bf, size: 2.2, transparent: true, opacity: 0.4 })));
     }
     function makeRibbon(phase, color, opacity) {
       const SEG = 200, M = 12, W = 34, T = 12, R = 190, EXT = 950, TURN = 6;
@@ -324,8 +255,8 @@
     function buildV2() {
       const ribA = makeRibbon(0, 0x257fe5, 0.5);
       const ribB = makeRibbon(Math.PI, 0x7e5ce5, 0.5);
-      helixMeshesV2 = [ribA, ribB];
-      groupV2.add(ribA); groupV2.add(ribB);
+      helixMeshes = [ribA, ribB];
+      towerGroup.add(ribA); towerGroup.add(ribB);
       // 每层 = 满铺六边形网格(空六边形描边) + 节点实心六边形;边对边+留缝
       const D = Math.sqrt(3) * HEX_R * 1.06;
       const hexGeo = new THREE.CylinderGeometry(HEX_R, HEX_R, 2.6, 6);
@@ -344,26 +275,35 @@
         });
         const eg = new THREE.BufferGeometry();
         eg.setAttribute("position", new THREE.Float32BufferAttribute(posArr, 3));
-        groupV2.add(new THREE.LineSegments(eg, emptyMat));
+        towerGroup.add(new THREE.LineSegments(eg, emptyMat));
         list.forEach((n, i) => {
           const mesh = new THREE.Mesh(hexGeo, new THREE.MeshStandardMaterial({ color: V2_GRAY[li], transparent: true, opacity: 0.78, roughness: 0.3, metalness: 0.12 }));
           mesh.position.set(nodePts[i].x, layerY3[li], nodePts[i].z);
           mesh.rotation.y = 0;
           mesh.userData = { id: n.id, base: HEX_R, layer: li };
-          groupV2.add(mesh);
-          nodeMeshesV2.push(mesh);
-          n.meshV2 = mesh;
+          towerGroup.add(mesh);
+          nodeMeshes.push(mesh);
+          n.mesh = mesh;
         });
       });
+      const pGeo = new THREE.BufferGeometry();
+      const pPos = new Float32Array(60 * 3);
+      for (let i = 0; i < 60; i++) {
+        pPos[i * 3] = (Math.sin(i * 127.1) * 43758.5453 % 1) * 700 - 350;
+        pPos[i * 3 + 1] = (Math.sin(i * 311.7) * 12543.21 % 1) * 800 - 400;
+        pPos[i * 3 + 2] = (Math.sin(i * 74.7) * 269.87 % 1) * 500 - 250;
+      }
+      pGeo.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
+      scene.add(new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0xaab4bf, size: 2.2, transparent: true, opacity: 0.4 })));
     }
-    function applyV2Highlight() {
+    function applyHighlight() {
       const rel = new Set();
       if (selectedId) graph.edges.forEach((e) => { if (e.from === selectedId) rel.add(e.to); if (e.to === selectedId) rel.add(e.from); });
-      nodeMeshesV2.forEach((m) => {
+      nodeMeshes.forEach((m) => {
         m.children.slice().forEach((c) => m.remove(c));
         const id = m.userData.id;
         const ly = m.userData.layer || 0;
-        const hi = id === selectedId || id === hoverId;
+        const hi = id === selectedId || id === hoverId || (selectedLayer !== null && ly === selectedLayer);
         if (hi || rel.has(id)) m.material.color.setHex(V2_SAT[ly]);
         else m.material.color.setHex(V2_GRAY[ly]);
         if (hi || rel.has(id)) {
@@ -375,28 +315,16 @@
         }
       });
     }
-    function setVersion(v) {
-      if (currentVersion === v) return;
-      currentVersion = v;
-      groupV1.visible = v === 1;
-      groupV2.visible = v === 2;
-      tiltX = v === 1 ? 0.16 : 0.85;
-      document.body.classList.toggle("v2", v === 2);
-      document.querySelectorAll(".ver-btn").forEach((b) => b.classList.toggle("active", parseInt(b.dataset.v, 10) === v));
-      hoverId = null; hoverBall = false;
-      layerLabelDivs = [];
-      rebuildLinks();
-    }
     function rebuildLinks() {
       if (linkGroup) { towerGroup.remove(linkGroup); linkGroup = null; }
       linkDots = [];
       rebuildNodeLabels();
-      applyV2Highlight();
+      applyHighlight();
       if (!selectedId) return;
       linkGroup = new THREE.Group();
       graph.edges.forEach((e) => {
         if (e.from !== selectedId && e.to !== selectedId) return;
-        const a = curMesh(graph.nodeIndex.get(e.from)), b = curMesh(graph.nodeIndex.get(e.to));
+        const a = graph.nodeIndex.get(e.from).mesh, b = graph.nodeIndex.get(e.to).mesh;
         if (!a || !b) return;
         const col = new THREE.Color(LAYER_COLORS_BRIGHT[graph.nodeIndex.get(selectedId).layer]);
         linkGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([a.position, b.position]), new THREE.LineBasicMaterial({ color: col, transparent: true, opacity: 0.75 })));
@@ -414,7 +342,7 @@
       graph.edges.forEach((e) => { if (e.from === selectedId) rel.add(e.to); if (e.to === selectedId) rel.add(e.from); });
       rel.forEach((id) => {
         const n = graph.nodeIndex.get(id);
-        const m = curMesh(n);
+        const m = n.mesh;
         if (!n || !m) return;
         const el = document.createElement("div");
         el.className = "node-label";
@@ -436,22 +364,25 @@
       });
     }
     let layerLabelDivs = [];
+    const HEX_POS = [
+      { x: 0, y: 0, li: 0 }, { x: 51, y: 87, li: 1 }, { x: 0, y: 175, li: 2 }, { x: 51, y: 262, li: 3 }, { x: 0, y: 350, li: 4 },
+      { x: 102, y: 0, li: -1 }, { x: 102, y: 175, li: -1 }
+    ];
     function updateLayerLabelsPos() {
-      const h = stageEl.clientHeight;
       if (!layerLabelDivs.length) {
         let html = "";
-        LAYERS.forEach((L, li) => {
-          const dotColor = currentVersion === 2 ? "#" + V2_GRAY[li].toString(16).padStart(6, "0") : LAYER_COLORS[li];
-          html += '<div class="layer-label"><i class="ldot" style="background:' + dotColor + '"></i><span class="lname">' + L.name + '</span><span class="lcount">' + nodesByLayer[li].length + '</span></div>';
+        HEX_POS.forEach((p) => {
+          if (p.li < 0) { html += '<div class="layer-hex ghost" style="left:' + p.x + 'px;top:' + p.y + 'px"></div>'; return; }
+          html += '<div class="layer-hex" data-li="' + p.li + '" style="left:' + p.x + 'px;top:' + p.y + 'px;--hex-accent:' + LAYER_COLORS_BRIGHT[p.li] + '"><span class="lname">' + LAYERS[p.li].name + '</span><span class="lcount">' + nodesByLayer[p.li].length + '</span></div>';
         });
         layerLabelsEl.innerHTML = html;
         layerLabelDivs = Array.from(layerLabelsEl.children);
+        layerLabelsEl.querySelectorAll(".layer-hex:not(.ghost)").forEach((el) => {
+          el.addEventListener("click", () => selectLayer(parseInt(el.dataset.li, 10)));
+        });
       }
-      LAYERS.forEach((L, li) => {
-        const v = labelAnchors[li].clone();
-        towerGroup.localToWorld(v);
-        v.project(camera);
-        layerLabelDivs[li].style.top = ((1 - v.y) / 2 * h).toFixed(0) + "px";
+      layerLabelDivs.forEach((el) => {
+        el.classList.toggle("sel", parseInt(el.dataset.li, 10) === selectedLayer);
       });
     }
     function pickAt(clientX, clientY) {
@@ -459,7 +390,7 @@
       ndc.x = ((clientX - rect.left) / rect.width) * 2 - 1;
       ndc.y = -((clientY - rect.top) / rect.height) * 2 + 1;
       raycaster.setFromCamera(ndc, camera);
-      const hits = raycaster.intersectObjects(curNodeMeshes());
+      const hits = raycaster.intersectObjects(nodeMeshes);
       return hits.length ? hits[0].object.userData.id : null;
     }
     function tick(now) {
@@ -474,13 +405,13 @@
       const hb = !!hid;
       if (hb !== hoverBall || hid !== hoverId) {
         hoverBall = hb; hoverId = hid;
-        curNodeMeshes().forEach((m) => {
+        nodeMeshes.forEach((m) => {
           const isH = m.userData.id === hoverId, isS = m.userData.id === selectedId;
-          const hi2 = isS || (currentVersion === 2 && isH);
+          const hi2 = isS || isH;
           m.scale.setScalar(hi2 ? 1.55 : isH ? 1.35 : 1);
           m.material.emissiveIntensity = hi2 ? 0.5 : isH ? 0.4 : 0.18;
         });
-        if (currentVersion === 2) applyV2Highlight();
+        applyHighlight();
       }
       if (hid && hid !== selectedId) {
         const n = graph.nodeIndex.get(hid);
@@ -504,8 +435,8 @@
 
     // ===== 弹窗(苹果风) =====
     function renderFocusPanel() {
-      if (!selectedId) {
-        let html = '<h2>生物工程专业图谱 · 总览</h2><div class="fp-concept" style="color:#047857">DUT · SCHOOL OF BIOENGINEERING</div>'
+      if (!selectedId && selectedLayer === null) {
+        let html = '<h2>生物工程专业图谱 · 总览</h2><div class="fp-concept" style="color:#247BFE">DUT · SCHOOL OF BIOENGINEERING</div>'
           + '<div class="fp-stats">'
           + LAYERS.map((L, li) => '<div class="fp-stat"><b>' + nodesByLayer[li].length + '</b><span>' + L.name + '</span></div>').join("")
           + '<div class="fp-stat"><b>' + graph.edges.length + '</b><span>支撑关系</span></div>'
@@ -514,6 +445,15 @@
           html += '<div class="fp-layer"><i style="background:' + LAYER_COLORS_BRIGHT[li] + '"></i><span class="fp-ln">' + L.name + '</span><span class="fp-lc">' + nodesByLayer[li].length + '</span></div>';
         });
         html += '</div><div class="fp-tip">点击任意节点查看其自身信息与父/子级关系;列表项可点击跳转。</div>';
+        focusPanelEl.innerHTML = html;
+        return;
+      }
+      if (selectedLayer !== null) {
+        const list = nodesByLayer[selectedLayer];
+        let html = '<h3>' + LAYERS[selectedLayer].name + '</h3><div class="np-concept" style="color:' + LAYER_COLORS_BRIGHT[selectedLayer] + '">第 ' + (selectedLayer + 1) + ' 层 · ' + list.length + ' 个节点</div>'
+          + '<div class="np-rel"><div class="np-verb" style="color:' + LAYER_COLORS_BRIGHT[selectedLayer] + '">本层节点(' + list.length + ')</div><ul>'
+          + list.map((t) => '<li data-id="' + t.id + '" class="np-link">' + t.entity + '</li>').join("") + '</ul></div>'
+          + '<div class="fp-tip">点击列表项查看节点详情;再次点击左侧六边形取消整层选中。</div>';
         focusPanelEl.innerHTML = html;
         return;
       }
@@ -534,8 +474,14 @@
       html += '<div class="fp-tip">点击空白处返回总览;列表项可点击跳转。</div>';
       focusPanelEl.innerHTML = html;
     }
-    function openPopover(id) { selectedId = id; rebuildLinks(); renderFocusPanel(); }
-    function closePopover() { selectedId = null; rebuildLinks(); renderFocusPanel(); }
+    function selectLayer(li) {
+      selectedLayer = (selectedLayer === li) ? null : li;
+      selectedId = null;
+      rebuildLinks();
+      renderFocusPanel();
+    }
+    function openPopover(id) { selectedId = id; selectedLayer = null; rebuildLinks(); renderFocusPanel(); }
+    function closePopover() { selectedId = null; selectedLayer = null; rebuildLinks(); renderFocusPanel(); }
 
     // ===== 交互 =====
     stageEl.addEventListener("pointerdown", (e) => {
@@ -591,11 +537,6 @@
       selectedId = null;
       focusPanelEl.classList.add("open");
       renderFocusPanel();
-      document.getElementById("verSwitch").addEventListener("click", (e) => {
-        const v = e.target && e.target.dataset ? parseInt(e.target.dataset.v, 10) : 0;
-        if (v === 1 || v === 2) setVersion(v);
-      });
-      setVersion(2);
       requestAnimationFrame(tick);
     }
     init();
