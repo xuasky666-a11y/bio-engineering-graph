@@ -1,13 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-一次性脚本：构造「大连理工大学生物学院 · 生物工程专业」OBE 图谱数据，
-并注入 dna.html 的内联数据行 window.OBE_RELATION_DATA。
-
-设计原则：
-- 沿用 OBE 十概念骨架与全部关系动词（耦合/组装/支撑/直通/提取/需求/拆解/供给/
-  拆分/组合/解构/聚合/重构/适用/应用/适配/再现/场景单元-专业认知/专业认知-专业认知）。
-- 只按「归属关系」单向定义，脚本自动生成出入双向对称数据，避免手工出错。
+生成「生物工程」专业图谱数据(公司标准 5 层结构)并注入 dna.html。
+层级:培养目标 → 毕业要求 → 毕业要求指标点 → 课程 → 课程知识点(扩散式,节点数递增)。
+schema: { layers:[...], nodes:[{id,name,layer,attrs{},parents[],children[]}] }
 """
 import json
 import pathlib
@@ -15,271 +11,137 @@ import pathlib
 HERE = pathlib.Path(__file__).resolve().parent
 DNA = HERE / "dna.html"
 
-# ============ 实体定义 ============
-JOB = "生物制药工程师、发酵工程师、基因工程研发工程师"
+LAYERS = ["培养目标", "毕业要求", "毕业要求指标点", "课程", "课程知识点"]
 
-PROJECTS = ["生物制药工艺项目实战", "发酵工程生产项目实战", "基因工程产品研发项目实战"]
-COURSES = ["基因工程", "发酵工程", "细胞工程"]
-UNITS = [
-    "教学单元1 工具酶与基因操作载体",
-    "教学单元2 基因克隆与重组DNA构建",
-    "教学单元3 基因表达与检测技术",
-    "教学单元4 菌种选育与保藏",
-    "教学单元5 培养基与灭菌技术",
-    "教学单元6 发酵过程控制与放大",
-    "教学单元7 细胞培养技术",
-    "教学单元8 细胞融合与杂交瘤技术",
-    "教学单元9 产物分离与纯化",
+nodes = []
+def add(nid, name, layer, **attrs):
+    nodes.append({"id": nid, "name": name, "layer": layer, "attrs": attrs, "parents": [], "children": []})
+
+# ===== L0 培养目标 =====
+add("G1", "培养目标①·生物制品研发与生产高级工程技术人才", 0,
+    目标定位="面向生物制药与生物制品企业,培养具备研发、生产与质量管理能力的高级工程技术人才",
+    服务面向="生物制药 / 生物制品行业", 学制="4 年", 授予学位="工学学士")
+add("G2", "培养目标②·生物过程工程与装备制造复合型人才", 0,
+    目标定位="面向生物过程工程与生物装备制造,培养工艺开发与装备集成的复合型人才",
+    服务面向="生物过程 / 装备制造行业", 学制="4 年", 授予学位="工学学士")
+
+# ===== L1 毕业要求 =====
+BR = [
+    ("BR1", "毕业要求1·工程知识", "掌握数学、自然科学、工程基础和生物工程专业知识,用于解决复杂生物工程问题"),
+    ("BR2", "毕业要求2·问题分析", "能够应用数学、自然科学和工程科学的基本原理,识别、表达和分析复杂生物工程问题"),
+    ("BR3", "毕业要求3·设计/开发解决方案", "能够设计针对复杂生物工程问题的解决方案,满足特定需求的系统、单元或工艺流程"),
+    ("BR4", "毕业要求4·研究", "能够基于科学原理并采用科学方法对复杂生物工程问题进行研究,设计实验、分析与解释数据"),
+    ("BR5", "毕业要求5·使用现代工具", "能够开发、选择与使用恰当的技术、资源、现代工程工具和信息技术工具"),
+    ("BR6", "毕业要求6·工程与社会", "能够评价生物工程实践对社会、健康、安全、法律以及文化的影响"),
+    ("BR7", "毕业要求7·环境和可持续发展", "理解生物工程实践对环境、社会可持续发展的影响"),
+    ("BR8", "毕业要求8·职业规范", "具有人文社会科学素养、社会责任感,遵守工程职业道德和规范"),
 ]
-SCENE_MODULES = [
-    "重组人胰岛素规模化生产",
-    "青霉素抗生素发酵生产",
-    "重组蛋白表达与纯化",
-    "基因工程疫苗制备",
-    "单克隆抗体制备",
+for nid, name, desc in BR:
+    add(nid, name, 1, 要求描述=desc)
+
+# ===== L2 毕业要求指标点 =====
+IP = [
+    ("IP1", "BR1", "指标点1.1·数学与自然科学基础", "能够将数学、自然科学知识用于生物工程问题的表述与建模"),
+    ("IP2", "BR1", "指标点1.2·工程基础", "能够将工程基础知识用于生物工程专业工程问题的分析与推演"),
+    ("IP3", "BR2", "指标点2.1·问题识别与表达", "能够识别和表达复杂生物工程问题的关键环节与约束条件"),
+    ("IP4", "BR2", "指标点2.2·问题分析与文献", "能够结合文献对复杂生物工程问题进行分析和论证"),
+    ("IP5", "BR3", "指标点3.1·方案设计", "能够针对特定需求设计生物工程单元或工艺方案"),
+    ("IP6", "BR3", "指标点3.2·系统开发与改进", "能够在设计中考虑安全、健康、法律、环境等因素并改进"),
+    ("IP7", "BR4", "指标点4.1·研究与实验", "能够设计实验、采集与分析数据,得到合理有效的结论"),
+    ("IP8", "BR5", "指标点5.1·现代工具使用", "能够选择与使用现代仪器、软件工具进行预测和模拟"),
+    ("IP9", "BR6", "指标点6.1·工程与社会评价", "能够评价生物工程实践对社会、健康、安全、法律的影响"),
+    ("IP10", "BR7", "指标点7.1·可持续发展理解", "理解生物工程实践对环境与可持续发展的影响并评价"),
+    ("IP11", "BR8", "指标点8.1·职业规范", "理解并遵守工程职业道德和规范,履行责任"),
+    ("IP12", "BR8", "指标点8.2·社会责任", "理解生物工程对公众健康、安全、福祉的社会责任"),
 ]
-SCENE_UNITS = [
-    "工程菌高密度发酵生产胰岛素",
-    "青霉素发酵罐过程优化",
-    "重组质粒构建与工程菌转化",
-    "疫苗抗原表达与灭活",
-    "杂交瘤细胞筛选与培养",
-    "目标蛋白分离纯化",
+for nid, parent, name, desc in IP:
+    add(nid, name, 2, 指标点描述=desc, 对应毕业要求=parent)
+
+# ===== L3 课程 =====
+COURSES = [
+    ("C1", "生物化学", "BIOE2001", "必修", "王建国", 4.0, 64),
+    ("C2", "微生物学", "BIOE2002", "必修", "李秀梅", 3.5, 56),
+    ("C3", "分子生物学", "BIOE2003", "必修", "赵启明", 3.5, 56),
+    ("C4", "细胞生物学", "BIOE2004", "必修", "刘志强", 3.0, 48),
+    ("C5", "基因工程", "BIOE3001", "必修", "陈国华", 3.5, 56),
+    ("C6", "发酵工程", "BIOE3002", "必修", "杨晓峰", 3.5, 56),
+    ("C7", "细胞工程", "BIOE3003", "必修", "周雅琴", 3.0, 48),
+    ("C8", "酶工程", "BIOE3004", "专业选修", "吴德伟", 2.5, 40),
+    ("C9", "生物分离工程", "BIOE3005", "必修", "郑海涛", 3.0, 48),
+    ("C10", "生物工艺学", "BIOE3006", "必修", "孙丽娟", 3.0, 48),
+    ("C11", "化工原理", "BIOE2005", "必修", "马文涛", 4.0, 64),
+    ("C12", "生物工程设备", "BIOE3007", "专业选修", "朱明远", 2.5, 40),
+    ("C13", "生物统计学", "BIOE2006", "必修", "胡雪梅", 2.5, 40),
+    ("C14", "仪器分析", "BIOE2007", "必修", "林建华", 3.0, 48),
+    ("C15", "生物信息学", "BIOE3008", "专业选修", "何志勇", 2.5, 40),
+    ("C16", "生物工程工厂设计", "BIOE3009", "专业选修", "郭晓东", 2.5, 40),
 ]
-SCENE_GRAINS = [
-    "工程菌接种与扩培",
-    "发酵罐参数调控",
-    "质粒酶切与连接",
-    "工程菌转化与筛选",
-    "抗原灭活与配制",
-    "细胞融合与杂交瘤筛选",
-    "层析分离纯化操作",
-    "产物浓缩冻干与质检",
+for cid, name, code, nature, owner, credit, hours in COURSES:
+    add(cid, name, 3, 课程编号=code, 课程性质=nature, 适用学院="生物工程学院", 适用专业="生物工程",
+        课程负责人=owner, 学分=credit, 学时=hours)
+
+# ===== L4 课程知识点 =====
+KNOW = {
+    "C1": ["蛋白质结构与功能", "酶动力学与催化机制", "糖代谢与能量转换"],
+    "C2": ["微生物形态与分类", "微生物营养与代谢", "微生物生长与控制"],
+    "C3": ["DNA 复制与修复", "基因转录与翻译", "基因表达调控"],
+    "C4": ["细胞膜与物质运输", "细胞信号转导", "细胞周期与凋亡"],
+    "C5": ["工具酶与基因载体", "基因克隆与重组", "基因表达与检测"],
+    "C6": ["菌种选育与保藏", "发酵动力学与过程控制", "发酵产物分离"],
+    "C7": ["细胞培养技术", "细胞融合与杂交", "干细胞与组织工程"],
+    "C8": ["酶分离与纯化", "酶固定化技术", "酶催化反应工程"],
+    "C9": ["萃取与膜分离", "层析分离技术", "结晶与干燥"],
+    "C10": ["上游工艺与培养基", "中游工艺与过程控制", "下游工艺与产物回收"],
+    "C11": ["流体流动与输送", "传热与换热设备", "传质与分离过程"],
+    "C12": ["生物反应器设计", "灭菌与空气除菌设备", "分离与纯化设备"],
+    "C13": ["数据描述与分布", "假设检验与方差分析", "回归与相关分析"],
+    "C14": ["光谱分析", "色谱分析", "电化学分析"],
+    "C15": ["序列比对与数据库", "基因组与蛋白质组", "系统生物学建模"],
+    "C16": ["工艺设计与物料衡算", "车间布置与管道设计", "经济与环境评价"],
+}
+kidx = 0
+offsets = {}
+for cid, klist in KNOW.items():
+    offsets[cid] = kidx
+    for kname in klist:
+        kidx += 1
+        add("K%d" % kidx, kname, 4, 知识点描述="%s 的核心知识点,支撑课程目标达成" % kname, 所属课程=cid)
+
+# ===== 父子边(扩散) =====
+EDGES = [
+    ("G1", "BR1"), ("G1", "BR2"), ("G1", "BR3"), ("G1", "BR4"), ("G1", "BR5"),
+    ("G2", "BR4"), ("G2", "BR5"), ("G2", "BR6"), ("G2", "BR7"), ("G2", "BR8"),
+    ("BR1", "IP1"), ("BR1", "IP2"), ("BR2", "IP3"), ("BR2", "IP4"), ("BR3", "IP5"), ("BR3", "IP6"),
+    ("BR4", "IP7"), ("BR5", "IP8"), ("BR6", "IP9"), ("BR7", "IP10"), ("BR8", "IP11"), ("BR8", "IP12"),
+    ("IP1", "C1"), ("IP1", "C2"), ("IP2", "C11"), ("IP2", "C13"), ("IP3", "C1"), ("IP3", "C3"),
+    ("IP4", "C3"), ("IP4", "C14"), ("IP5", "C5"), ("IP5", "C6"), ("IP6", "C6"), ("IP6", "C10"),
+    ("IP7", "C5"), ("IP7", "C9"), ("IP8", "C14"), ("IP8", "C15"), ("IP9", "C10"), ("IP9", "C16"),
+    ("IP10", "C6"), ("IP10", "C10"), ("IP11", "C1"), ("IP11", "C2"), ("IP12", "C10"), ("IP12", "C16"),
 ]
-ABILITY_MODULES = [
-    "菌种选育与保藏能力",
-    "发酵过程控制能力",
-    "基因克隆与表达能力",
-    "分离纯化能力",
-    "细胞培养与操作能力",
-]
-KNOWLEDGE_UNITS = [
-    "微生物学与菌种知识",
-    "培养基与灭菌原理",
-    "发酵动力学与过程控制",
-    "分子生物学与基因操作原理",
-    "酶学与工具酶知识",
-    "细胞生物学与培养原理",
-    "免疫学与抗体知识",
-    "分离纯化与下游加工知识",
-]
-KNOWLEDGE_GRAINS = [
-    "微生物分类与生理", "菌种生长曲线", "菌种保藏方法",
-    "培养基组成与配制", "灭菌原理与方法",
-    "发酵动力学模型", "溶氧与pH控制", "发酵放大原理",
-    "DNA复制与基因表达", "基因克隆原理", "PCR与基因扩增",
-    "限制性内切酶与连接酶", "载体与质粒结构",
-    "细胞结构与功能", "细胞培养条件", "细胞生长调控",
-    "抗原抗体反应", "单克隆抗体原理",
-    "层析分离原理", "膜分离技术", "浓缩与干燥", "产物质量检测",
-]
+for cid, klist in KNOW.items():
+    for i, kname in enumerate(klist):
+        EDGES.append((cid, "K%d" % (offsets[cid] + i + 1)))
 
-CONCEPTS = ["岗位", "项目化课", "专业认知课", "教学单元", "能力模块",
-            "知识单元", "知识颗粒", "场景模块", "场景单元", "场景颗粒"]
-concept_entities = {
-    "岗位": [JOB],
-    "项目化课": PROJECTS,
-    "专业认知课": COURSES,
-    "教学单元": UNITS,
-    "能力模块": ABILITY_MODULES,
-    "知识单元": KNOWLEDGE_UNITS,
-    "知识颗粒": KNOWLEDGE_GRAINS,
-    "场景模块": SCENE_MODULES,
-    "场景单元": SCENE_UNITS,
-    "场景颗粒": SCENE_GRAINS,
-}
-entity_concept = {}
-for c, es in concept_entities.items():
-    for e in es:
-        entity_concept[e] = c
+byid = {n["id"]: n for n in nodes}
+for p, c in EDGES:
+    if p in byid and c in byid:
+        byid[p]["children"].append(c)
+        byid[c]["parents"].append(p)
 
-# ============ 归属映射 ============
-unit_to_course = {
-    UNITS[0]: COURSES[0], UNITS[1]: COURSES[0], UNITS[2]: COURSES[0],
-    UNITS[3]: COURSES[1], UNITS[4]: COURSES[1], UNITS[5]: COURSES[1],
-    UNITS[6]: COURSES[2], UNITS[7]: COURSES[2], UNITS[8]: COURSES[2],
-}
-course_to_projects = {
-    COURSES[0]: [PROJECTS[2], PROJECTS[0]],
-    COURSES[1]: [PROJECTS[1], PROJECTS[0]],
-    COURSES[2]: [PROJECTS[0], PROJECTS[2]],
-}
-scene_module_to_units = {
-    SCENE_MODULES[0]: [SCENE_UNITS[0]],
-    SCENE_MODULES[1]: [SCENE_UNITS[1]],
-    SCENE_MODULES[2]: [SCENE_UNITS[2], SCENE_UNITS[5]],
-    SCENE_MODULES[3]: [SCENE_UNITS[3]],
-    SCENE_MODULES[4]: [SCENE_UNITS[4]],
-}
-scene_unit_to_grains = {
-    SCENE_UNITS[0]: [SCENE_GRAINS[0], SCENE_GRAINS[1]],
-    SCENE_UNITS[1]: [SCENE_GRAINS[1]],
-    SCENE_UNITS[2]: [SCENE_GRAINS[2], SCENE_GRAINS[3]],
-    SCENE_UNITS[3]: [SCENE_GRAINS[4]],
-    SCENE_UNITS[4]: [SCENE_GRAINS[5]],
-    SCENE_UNITS[5]: [SCENE_GRAINS[6], SCENE_GRAINS[7]],
-}
-scene_module_to_projects = {
-    SCENE_MODULES[0]: [PROJECTS[0]],
-    SCENE_MODULES[1]: [PROJECTS[1]],
-    SCENE_MODULES[2]: [PROJECTS[2]],
-    SCENE_MODULES[3]: [PROJECTS[0], PROJECTS[2]],
-    SCENE_MODULES[4]: [PROJECTS[0]],
-}
-scene_unit_to_course = {
-    SCENE_UNITS[0]: COURSES[1], SCENE_UNITS[1]: COURSES[1],
-    SCENE_UNITS[2]: COURSES[0], SCENE_UNITS[3]: COURSES[0],
-    SCENE_UNITS[4]: COURSES[2], SCENE_UNITS[5]: COURSES[2],
-}
-unit_coupling = {
-    UNITS[0]: {"scene": [SCENE_GRAINS[2]], "know": [KNOWLEDGE_GRAINS[11], KNOWLEDGE_GRAINS[12]]},
-    UNITS[1]: {"scene": [SCENE_GRAINS[2], SCENE_GRAINS[3]], "know": [KNOWLEDGE_GRAINS[9], KNOWLEDGE_GRAINS[10]]},
-    UNITS[2]: {"scene": [SCENE_GRAINS[3], SCENE_GRAINS[4]], "know": [KNOWLEDGE_GRAINS[8], KNOWLEDGE_GRAINS[21]]},
-    UNITS[3]: {"scene": [SCENE_GRAINS[0]], "know": [KNOWLEDGE_GRAINS[0], KNOWLEDGE_GRAINS[1], KNOWLEDGE_GRAINS[2]]},
-    UNITS[4]: {"scene": [], "know": [KNOWLEDGE_GRAINS[3], KNOWLEDGE_GRAINS[4]]},
-    UNITS[5]: {"scene": [SCENE_GRAINS[1]], "know": [KNOWLEDGE_GRAINS[5], KNOWLEDGE_GRAINS[6], KNOWLEDGE_GRAINS[7]]},
-    UNITS[6]: {"scene": [SCENE_GRAINS[5]], "know": [KNOWLEDGE_GRAINS[13], KNOWLEDGE_GRAINS[14], KNOWLEDGE_GRAINS[15]]},
-    UNITS[7]: {"scene": [SCENE_GRAINS[5]], "know": [KNOWLEDGE_GRAINS[16], KNOWLEDGE_GRAINS[17]]},
-    UNITS[8]: {"scene": [SCENE_GRAINS[6], SCENE_GRAINS[7]], "know": [KNOWLEDGE_GRAINS[18], KNOWLEDGE_GRAINS[19], KNOWLEDGE_GRAINS[20]]},
-}
-ability_to_kunits = {
-    ABILITY_MODULES[0]: [KNOWLEDGE_UNITS[0]],
-    ABILITY_MODULES[1]: [KNOWLEDGE_UNITS[1], KNOWLEDGE_UNITS[2]],
-    ABILITY_MODULES[2]: [KNOWLEDGE_UNITS[3], KNOWLEDGE_UNITS[4]],
-    ABILITY_MODULES[3]: [KNOWLEDGE_UNITS[7]],
-    ABILITY_MODULES[4]: [KNOWLEDGE_UNITS[5], KNOWLEDGE_UNITS[6]],
-}
-ability_to_projects = {
-    ABILITY_MODULES[0]: [PROJECTS[1]],
-    ABILITY_MODULES[1]: [PROJECTS[1]],
-    ABILITY_MODULES[2]: [PROJECTS[2], PROJECTS[0]],
-    ABILITY_MODULES[3]: [PROJECTS[0], PROJECTS[2]],
-    ABILITY_MODULES[4]: [PROJECTS[0]],
-}
-kunit_to_grains = {
-    KNOWLEDGE_UNITS[0]: [KNOWLEDGE_GRAINS[0], KNOWLEDGE_GRAINS[1], KNOWLEDGE_GRAINS[2]],
-    KNOWLEDGE_UNITS[1]: [KNOWLEDGE_GRAINS[3], KNOWLEDGE_GRAINS[4]],
-    KNOWLEDGE_UNITS[2]: [KNOWLEDGE_GRAINS[5], KNOWLEDGE_GRAINS[6], KNOWLEDGE_GRAINS[7]],
-    KNOWLEDGE_UNITS[3]: [KNOWLEDGE_GRAINS[8], KNOWLEDGE_GRAINS[9], KNOWLEDGE_GRAINS[10]],
-    KNOWLEDGE_UNITS[4]: [KNOWLEDGE_GRAINS[11], KNOWLEDGE_GRAINS[12]],
-    KNOWLEDGE_UNITS[5]: [KNOWLEDGE_GRAINS[13], KNOWLEDGE_GRAINS[14], KNOWLEDGE_GRAINS[15]],
-    KNOWLEDGE_UNITS[6]: [KNOWLEDGE_GRAINS[16], KNOWLEDGE_GRAINS[17]],
-    KNOWLEDGE_UNITS[7]: [KNOWLEDGE_GRAINS[18], KNOWLEDGE_GRAINS[19], KNOWLEDGE_GRAINS[20], KNOWLEDGE_GRAINS[21]],
-}
-kunit_to_course = {
-    KNOWLEDGE_UNITS[0]: COURSES[1], KNOWLEDGE_UNITS[1]: COURSES[1], KNOWLEDGE_UNITS[2]: COURSES[1],
-    KNOWLEDGE_UNITS[3]: COURSES[0], KNOWLEDGE_UNITS[4]: COURSES[0],
-    KNOWLEDGE_UNITS[5]: COURSES[2], KNOWLEDGE_UNITS[6]: COURSES[2], KNOWLEDGE_UNITS[7]: COURSES[2],
-}
+data = {"layers": LAYERS, "nodes": nodes}
+js = "window.OBE_RELATION_DATA = " + json.dumps(data, ensure_ascii=False, separators=(",", ":")) + ";"
 
-# ============ 生成有向边 ============
-E = []
-def add(fe, verb, te):
-    E.append((fe, verb, te))
-
-for p in PROJECTS:
-    add(p, "直通", JOB)
-for c, ps in course_to_projects.items():
-    for p in ps:
-        add(c, "支撑", p)
-for u, c in unit_to_course.items():
-    add(u, "组装", c)
-for u, cp in unit_coupling.items():
-    for g in cp["scene"]:
-        add(g, "耦合", u)
-    for g in cp["know"]:
-        add(g, "耦合", u)
-# 场景链
-for cm in SCENE_MODULES:
-    add(JOB, "提取", cm)
-    add(cm, "再现", JOB)
-for cm, css in scene_module_to_units.items():
-    for cs in css:
-        add(cm, "拆解", cs)
-        add(cs, "供给", cm)
-for cs, cks in scene_unit_to_grains.items():
-    for ck in cks:
-        add(cs, "拆分", ck)
-        add(ck, "组合", cs)
-for cm, ps in scene_module_to_projects.items():
-    for p in ps:
-        add(cm, "适用", p)
-for cs, c in scene_unit_to_course.items():
-    add(cs, "场景单元-专业认知", c)
-# 能力/知识链
-for nm in ABILITY_MODULES:
-    add(JOB, "需求", nm)
-    add(nm, "适配", JOB)
-for nm, kss in ability_to_kunits.items():
-    for ks in kss:
-        add(nm, "重构", ks)
-        add(ks, "供给", nm)
-for ks, zks in kunit_to_grains.items():
-    for zk in zks:
-        add(ks, "解构", zk)
-        add(zk, "聚合", ks)
-for nm, ps in ability_to_projects.items():
-    for p in ps:
-        add(nm, "应用", p)
-for ks, c in kunit_to_course.items():
-    add(ks, "专业认知-专业认知", c)
-
-# ============ 构建 data（出入双向对称）============
-data = {c: {e: {"出": {}, "入": {}} for e in es} for c, es in concept_entities.items()}
-for fe, verb, te in E:
-    fc, tc = entity_concept[fe], entity_concept[te]
-    data[fc][fe]["出"].setdefault(verb, []).append({"概念": tc, "实体": te})
-    data[tc][te]["入"].setdefault(verb, []).append({"概念": fc, "实体": fe})
-
-# ============ 构建 meta ============
-relation_verbs = {}
-for c in CONCEPTS:
-    outv, inv = [], []
-    for e in concept_entities[c]:
-        for v in data[c][e]["出"]:
-            if v not in outv:
-                outv.append(v)
-        for v in data[c][e]["入"]:
-            if v not in inv:
-                inv.append(v)
-    relation_verbs[c] = {"出": outv, "入": inv}
-
-total = sum(len(es) for es in concept_entities.values())
-meta = {
-    "说明": "大连理工大学生物学院·生物工程专业图谱：按 OBE 十概念的出/入关系动词挂载目标实体。中轴 教学单元→组装→专业认知课→支撑→项目化课→直通→岗位；左场景链、右能力/知识链向下拆解至最小颗粒，颗粒经耦合汇入教学单元。向上托为默认阅读视角。",
-    "阅读方向": {
-        "默认": "向上托",
-        "向上托": "各颗粒度汇总成课直至岗位；展示回聚类动词与中轴（组装、支撑、直通、耦合、供给、聚合、组合、适配、再现、场景单元-专业认知、专业认知-专业认知等）",
-        "向下拆": "从岗位沿场景链、能力/知识链拆至最小颗粒；不含项目化课、专业认知课、教学单元；仅分解类动词（提取、需求、拆解、拆分、解构、重构等）",
-    },
-    "实体总数": total,
-    "概念": CONCEPTS,
-    "关系动词": relation_verbs,
-}
-result = {"meta": meta, "data": data}
-js = "window.OBE_RELATION_DATA = " + json.dumps(result, ensure_ascii=False, separators=(",", ":")) + ";"
-
-# ============ 注入 dna.html ============
 lines = DNA.read_text(encoding="utf-8").split("\n")
 hit = False
 for i, l in enumerate(lines):
     if l.strip().startswith("window.OBE_RELATION_DATA"):
         lines[i] = "    " + js
-        lines[i - 1] = "    /* 数据源：大连理工大学生物学院·生物工程专业 OBE 图谱（_build_bio.py 生成） */"
+        lines[i - 1] = "    /* 数据源:生物工程公司标准5层结构(_build_bio.py 生成) */"
         lines[i - 2] = "    /* Inline data for single-file delivery. */"
         hit = True
         break
 if not hit:
     raise SystemExit("未找到 window.OBE_RELATION_DATA 数据行")
 DNA.write_text("\n".join(lines), encoding="utf-8")
-print(f"注入完成：{total} 个实体，{len(E)} 条有向边（{len(E) * 2} 个出/入挂载点）")
+counts = [sum(1 for n in nodes if n["layer"] == i) for i in range(5)]
+print("注入完成:总节点 %d,各层 %s,边 %d" % (len(nodes), counts, len(EDGES)))
