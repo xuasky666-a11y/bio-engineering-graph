@@ -50,6 +50,14 @@
     .app-header-meta { font-size: 12px; font-weight: 400; color: var(--ink-4); }
 
     .stage-wrap { position: relative; flex: 1 1 auto; min-height: 0; }
+    body.v2 { background: linear-gradient(160deg, #f4f8fb 0%, #dce9f2 45%, #eef5f9 100%); }
+    .ver-switch {
+      position: absolute; left: 24px; top: 20px; z-index: 30; display: flex; padding: 3px; border-radius: 999px;
+      background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px);
+      border: 0.5px solid var(--hair); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    }
+    .ver-btn { border: none; background: transparent; padding: 6px 16px; border-radius: 999px; font-size: 13px; font-weight: 500; color: var(--ink-3); cursor: pointer; font-family: inherit; }
+    .ver-btn.active { background: var(--ink); color: #fff; }
     #stage3d { position: absolute; inset: 0; cursor: default; }
     #stage3d.dragging { cursor: grabbing; }
     #stage3d canvas { display: block; }
@@ -61,15 +69,15 @@
     .layer-label .lcount { font-size: 13px; font-weight: 500; color: var(--ink-3); padding: 2px 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.8); border: 0.5px solid var(--hair); }
 
     .focus-panel {
-      position: absolute; right: 28px; top: 28px; width: 360px; max-height: calc(100% - 56px);
+      position: absolute; right: 28px; top: 50%; width: 360px; max-height: calc(100% - 56px);
       overflow: auto; padding: 26px 28px; border-radius: 22px;
       background: var(--glass); backdrop-filter: saturate(180%) blur(22px);
       border: 0.5px solid var(--hair);
       box-shadow: 0 18px 50px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.04);
-      transform: translateX(calc(100% + 48px)); opacity: 0; pointer-events: none;
+      transform: translate(calc(100% + 48px), -50%); opacity: 0; pointer-events: none;
       transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1), opacity 260ms ease;
     }
-    .focus-panel.open { transform: translateX(0); opacity: 1; pointer-events: auto; }
+    .focus-panel.open { transform: translate(0, -50%); opacity: 1; pointer-events: auto; }
     .focus-panel h2 { margin: 0 0 2px; font-size: 22px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
     .focus-panel h3 { margin: 0 0 2px; font-size: 20px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
     .fp-concept, .np-concept { font-size: 12px; font-weight: 500; letter-spacing: 0.04em; }
@@ -114,6 +122,7 @@
 <body>
   <main class="app">
     <div class="stage-wrap">
+      <div class="ver-switch" id="verSwitch"><button class="ver-btn active" data-v="1">版本一</button><button class="ver-btn" data-v="2">版本二</button></div>
       <div id="stage3d"></div>
       <div class="layer-labels" id="layerLabels"></div>
       <aside class="focus-panel" id="focusPanel"></aside>
@@ -132,6 +141,9 @@
 
     const LAYER_COLORS = ["#b45309", "#be185d", "#6d28d9", "#0369a1", "#047857"];
     const LAYER_COLORS_BRIGHT = ["#d97706", "#db2777", "#7c3aed", "#0284c7", "#059669"];
+    const HEX_R = 16;
+    const V2_GRAY = [0xc9a08a, 0xc98a8a, 0xa68ac9, 0x8aa6c9, 0x8ac9a6];
+    const V2_SAT = [0xf97316, 0xef4444, 0x8b5cf6, 0x3b82f6, 0x22c55e];
     const LAYERS = [
       { name: "培养目标 · 岗位", r: 160 },
       { name: "项目化课 · 能力 / 场景模块", r: 160 },
@@ -167,7 +179,11 @@
 
     // ===== Three.js 3D =====
     let renderer, scene, camera, towerGroup, raycaster, ndc;
-    let nodeMeshes = [], helixMeshes = [], linkGroup = null, linkDots = [], labelAnchors = [], nodeLabelEls = [];
+    let nodeMeshesV1 = [], nodeMeshesV2 = [], helixMeshes = [], helixMeshesV2 = [], linkGroup = null, linkDots = [], labelAnchors = [], nodeLabelEls = [];
+    let groupV1 = null, groupV2 = null, currentVersion = 1;
+    function curMesh(n) { return currentVersion === 1 ? n.meshV1 : n.meshV2; }
+    function curNodeMeshes() { return currentVersion === 1 ? nodeMeshesV1 : nodeMeshesV2; }
+    function curHelix() { return currentVersion === 1 ? helixMeshes : helixMeshesV2; }
     const TH = 400, HELIX_EXT = 620, TURNS = 4.2;
     const layerY3 = [200, 100, 0, -100, -200];
 
@@ -218,9 +234,13 @@
       const dl2 = new THREE.DirectionalLight(0xdfe8ff, 0.4); dl2.position.set(-320, -180, 260); scene.add(dl2);
       towerGroup = new THREE.Group();
       scene.add(towerGroup);
+      groupV1 = new THREE.Group(); groupV2 = new THREE.Group();
+      towerGroup.add(groupV1); towerGroup.add(groupV2);
       raycaster = new THREE.Raycaster();
       ndc = new THREE.Vector2();
       buildTower();
+      buildV2();
+      groupV2.visible = false;
     }
     function tubeFrom(fn, color, radius) {
       const pts = [];
@@ -237,22 +257,28 @@
       const tubeA = tubeFrom(helixA, 0x2563eb, 5.0);
       const tubeB = tubeFrom(helixB, 0x7c3aed, 5.0);
       helixMeshes = [tubeA, tubeB];
-      towerGroup.add(tubeA); towerGroup.add(tubeB);
-      // 碱基横档
-      const rungMat = new THREE.LineBasicMaterial({ color: 0x9aa4b0, transparent: true, opacity: 0.45 });
+      groupV1.add(tubeA); groupV1.add(tubeB);
+      // 碱基横档(白色细圆柱,与层环同材质感)
+      const rungMat = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.1, roughness: 0.4, transparent: true, opacity: 0.9, emissive: 0xffffff, emissiveIntensity: 0.12 });
+      const YAXIS = new THREE.Vector3(0, 1, 0);
       for (let i = 8; i < 220; i += 8) {
         const t = i / 220;
-        const g = new THREE.BufferGeometry().setFromPoints([helixA(t), helixB(t)]);
-        towerGroup.add(new THREE.Line(g, rungMat));
+        const a = helixA(t), b = helixB(t);
+        const dir = new THREE.Vector3().subVectors(b, a);
+        const len = dir.length();
+        const rung = new THREE.Mesh(new THREE.CylinderGeometry(1.5, 1.5, len, 8), rungMat);
+        rung.position.copy(a).add(b).multiplyScalar(0.5);
+        rung.quaternion.setFromUnitVectors(YAXIS, dir.normalize());
+        groupV1.add(rung);
       }
       // 层环 + 层盘
       LAYERS.forEach((L, li) => {
         const ring = new THREE.Mesh(new THREE.TorusGeometry(L.r, 1.6, 10, 80), new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.1, roughness: 0.4, transparent: true, opacity: 0.9, emissive: 0xffffff, emissiveIntensity: 0.15 }));
         ring.rotation.x = Math.PI / 2; ring.position.y = layerY3[li];
-        towerGroup.add(ring);
+        groupV1.add(ring);
         const disc = new THREE.Mesh(new THREE.CircleGeometry(L.r, 56), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.06, side: THREE.DoubleSide }));
         disc.rotation.x = -Math.PI / 2; disc.position.y = layerY3[li];
-        towerGroup.add(disc);
+        groupV1.add(disc);
         labelAnchors[li] = new THREE.Vector3(0, layerY3[li], 0);
       });
       // 节点球
@@ -263,9 +289,9 @@
         const r = LAYERS[n.layer].r;
         mesh.position.set(r * Math.cos(n.theta0), layerY3[n.layer], r * Math.sin(n.theta0));
         mesh.userData = { id: n.id, base };
-        towerGroup.add(mesh);
-        nodeMeshes.push(mesh);
-        n.mesh = mesh;
+        groupV1.add(mesh);
+        nodeMeshesV1.push(mesh);
+        n.meshV1 = mesh;
       });
       // 漂浮微粒
       const pGeo = new THREE.BufferGeometry();
@@ -278,15 +304,118 @@
       pGeo.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
       scene.add(new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0xaab4bf, size: 2.2, transparent: true, opacity: 0.4 })));
     }
+    function makeRibbon(phase, color, opacity) {
+      const SEG = 200, M = 12, W = 34, T = 12, R = 190;
+      const pos = [], idx = [];
+      for (let i = 0; i <= SEG; i++) {
+        const t = i / SEG;
+        const y = -HELIX_EXT + t * 2 * HELIX_EXT;
+        const th = t * TURNS * Math.PI * 2 + phase;
+        const rx = Math.cos(th), rz = Math.sin(th);
+        const cx = R * rx, cz = R * rz;
+        for (let j = 0; j <= M; j++) {
+          const u = (j / M) * Math.PI * 2;
+          const wr = Math.cos(u) * T / 2, wy = Math.sin(u) * W / 2;
+          pos.push(cx + rx * wr, y + wy, cz + rz * wr);
+        }
+      }
+      for (let i = 0; i < SEG; i++) for (let j = 0; j < M; j++) {
+        const a = i * (M + 1) + j, b = a + 1, c = a + M + 1, d = c + 1;
+        idx.push(a, c, b, b, c, d);
+      }
+      const g = new THREE.BufferGeometry();
+      g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+      g.setIndex(idx);
+      g.computeVertexNormals();
+      // FrontSide: 只渲染外壁, 内壁(截面)不画 → 有体积且体内干净
+      return new THREE.Mesh(g, new THREE.MeshStandardMaterial({ color, transparent: true, opacity, side: THREE.FrontSide, roughness: 0.3, metalness: 0.15, depthWrite: false }));
+    }
+    function hexGridPoints(radius, D) {
+      const pts = [];
+      const Rmax = Math.ceil(radius / (D * Math.sqrt(3) / 2)) + 1;
+      for (let r = -Rmax; r <= Rmax; r++) for (let q = -Rmax; q <= Rmax; q++) {
+        const x = D * (q + r / 2);
+        const z = D * (Math.sqrt(3) / 2) * r;
+        const d = Math.hypot(x, z);
+        if (d <= radius) pts.push({ x, z, d });
+      }
+      pts.sort((a, b) => a.d - b.d);
+      return pts;
+    }
+    function buildV2() {
+      const ribA = makeRibbon(0, 0x257fe5, 0.5);
+      const ribB = makeRibbon(Math.PI, 0x7e5ce5, 0.5);
+      helixMeshesV2 = [ribA, ribB];
+      groupV2.add(ribA); groupV2.add(ribB);
+      // 每层 = 满铺六边形网格(空六边形描边) + 节点实心六边形;边对边+留缝
+      const D = Math.sqrt(3) * HEX_R * 1.06;
+      const hexGeo = new THREE.CylinderGeometry(HEX_R, HEX_R, 2.6, 6);
+      const emptyMat = new THREE.LineBasicMaterial({ color: 0x9dc3dd, transparent: true, opacity: 0.4 });
+      nodesByLayer.forEach((list, li) => {
+        const all = hexGridPoints(160, D);
+        const nodePts = all.slice(0, list.length);
+        const nodeSet = new Set(nodePts.map((p) => p.x.toFixed(1) + "," + p.z.toFixed(1)));
+        const posArr = [];
+        all.forEach((p) => {
+          if (nodeSet.has(p.x.toFixed(1) + "," + p.z.toFixed(1))) return;
+          for (let k = 0; k < 6; k++) {
+            const a1 = (k / 6) * Math.PI * 2, a2 = ((k + 1) / 6) * Math.PI * 2;
+            posArr.push(p.x + HEX_R * Math.sin(a1), layerY3[li], p.z + HEX_R * Math.cos(a1), p.x + HEX_R * Math.sin(a2), layerY3[li], p.z + HEX_R * Math.cos(a2));
+          }
+        });
+        const eg = new THREE.BufferGeometry();
+        eg.setAttribute("position", new THREE.Float32BufferAttribute(posArr, 3));
+        groupV2.add(new THREE.LineSegments(eg, emptyMat));
+        list.forEach((n, i) => {
+          const mesh = new THREE.Mesh(hexGeo, new THREE.MeshStandardMaterial({ color: V2_GRAY[li], transparent: true, opacity: 0.78, roughness: 0.3, metalness: 0.12 }));
+          mesh.position.set(nodePts[i].x, layerY3[li], nodePts[i].z);
+          mesh.rotation.y = 0;
+          mesh.userData = { id: n.id, base: HEX_R, layer: li };
+          groupV2.add(mesh);
+          nodeMeshesV2.push(mesh);
+          n.meshV2 = mesh;
+        });
+      });
+    }
+    function applyV2Highlight() {
+      const rel = new Set();
+      if (selectedId) graph.edges.forEach((e) => { if (e.from === selectedId) rel.add(e.to); if (e.to === selectedId) rel.add(e.from); });
+      nodeMeshesV2.forEach((m) => {
+        m.children.slice().forEach((c) => m.remove(c));
+        const id = m.userData.id;
+        const ly = m.userData.layer || 0;
+        const hi = id === selectedId || id === hoverId;
+        if (hi || rel.has(id)) m.material.color.setHex(V2_SAT[ly]);
+        else m.material.color.setHex(V2_GRAY[ly]);
+        if (hi || rel.has(id)) {
+          const ring = new THREE.Mesh(new THREE.TorusGeometry(HEX_R * 0.92, 2.4, 6, 6), new THREE.MeshBasicMaterial({ color: 0xfacc15 }));
+          ring.rotation.x = Math.PI / 2;
+          m.add(ring);
+        }
+      });
+    }
+    function setVersion(v) {
+      if (currentVersion === v) return;
+      currentVersion = v;
+      groupV1.visible = v === 1;
+      groupV2.visible = v === 2;
+      tiltX = v === 1 ? 0.16 : 0.85;
+      document.body.classList.toggle("v2", v === 2);
+      document.querySelectorAll(".ver-btn").forEach((b) => b.classList.toggle("active", parseInt(b.dataset.v, 10) === v));
+      hoverId = null; hoverBall = false;
+      layerLabelDivs = [];
+      rebuildLinks();
+    }
     function rebuildLinks() {
       if (linkGroup) { towerGroup.remove(linkGroup); linkGroup = null; }
       linkDots = [];
       rebuildNodeLabels();
+      applyV2Highlight();
       if (!selectedId) return;
       linkGroup = new THREE.Group();
       graph.edges.forEach((e) => {
         if (e.from !== selectedId && e.to !== selectedId) return;
-        const a = graph.nodeIndex.get(e.from).mesh, b = graph.nodeIndex.get(e.to).mesh;
+        const a = curMesh(graph.nodeIndex.get(e.from)), b = curMesh(graph.nodeIndex.get(e.to));
         if (!a || !b) return;
         const col = new THREE.Color(LAYER_COLORS_BRIGHT[graph.nodeIndex.get(selectedId).layer]);
         linkGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([a.position, b.position]), new THREE.LineBasicMaterial({ color: col, transparent: true, opacity: 0.75 })));
@@ -304,12 +433,13 @@
       graph.edges.forEach((e) => { if (e.from === selectedId) rel.add(e.to); if (e.to === selectedId) rel.add(e.from); });
       rel.forEach((id) => {
         const n = graph.nodeIndex.get(id);
-        if (!n || !n.mesh) return;
+        const m = curMesh(n);
+        if (!n || !m) return;
         const el = document.createElement("div");
         el.className = "node-label";
         el.innerHTML = '<i style="background:' + LAYER_COLORS_BRIGHT[n.layer] + '"></i>' + n.entity;
         nodeLabelsEl.appendChild(el);
-        nodeLabelEls.push({ el, mesh: n.mesh });
+        nodeLabelEls.push({ el, mesh: m });
       });
     }
     function updateNodeLabelPos() {
@@ -330,7 +460,8 @@
       if (!layerLabelDivs.length) {
         let html = "";
         LAYERS.forEach((L, li) => {
-          html += '<div class="layer-label"><i class="ldot" style="background:' + LAYER_COLORS_BRIGHT[li] + '"></i><span class="lname">' + L.name + '</span><span class="lcount">' + nodesByLayer[li].length + '</span></div>';
+          const dotColor = currentVersion === 2 ? "#" + V2_GRAY[li].toString(16).padStart(6, "0") : LAYER_COLORS[li];
+          html += '<div class="layer-label"><i class="ldot" style="background:' + dotColor + '"></i><span class="lname">' + L.name + '</span><span class="lcount">' + nodesByLayer[li].length + '</span></div>';
         });
         layerLabelsEl.innerHTML = html;
         layerLabelDivs = Array.from(layerLabelsEl.children);
@@ -347,7 +478,7 @@
       ndc.x = ((clientX - rect.left) / rect.width) * 2 - 1;
       ndc.y = -((clientY - rect.top) / rect.height) * 2 + 1;
       raycaster.setFromCamera(ndc, camera);
-      const hits = raycaster.intersectObjects(nodeMeshes);
+      const hits = raycaster.intersectObjects(curNodeMeshes());
       return hits.length ? hits[0].object.userData.id : null;
     }
     function tick(now) {
@@ -362,11 +493,13 @@
       const hb = !!hid;
       if (hb !== hoverBall || hid !== hoverId) {
         hoverBall = hb; hoverId = hid;
-        nodeMeshes.forEach((m) => {
+        curNodeMeshes().forEach((m) => {
           const isH = m.userData.id === hoverId, isS = m.userData.id === selectedId;
-          m.scale.setScalar(isS ? 1.55 : isH ? 1.35 : 1);
-          m.material.emissiveIntensity = isS ? 0.5 : isH ? 0.4 : 0.18;
+          const hi2 = isS || (currentVersion === 2 && isH);
+          m.scale.setScalar(hi2 ? 1.55 : isH ? 1.35 : 1);
+          m.material.emissiveIntensity = hi2 ? 0.5 : isH ? 0.4 : 0.18;
         });
+        if (currentVersion === 2) applyV2Highlight();
       }
       if (hid && hid !== selectedId) {
         const n = graph.nodeIndex.get(hid);
@@ -441,7 +574,7 @@
       mouse.x = e.clientX - rect.left; mouse.y = e.clientY - rect.top;
       if (!dragState) return;
       spin = dragState.spin + (e.clientX - dragState.x) * 0.005;
-      tiltX = Math.max(0.05, Math.min(0.4, dragState.tiltX + (e.clientY - dragState.y) * 0.0012));
+      tiltX = Math.max(0.05, Math.min(1.2, dragState.tiltX + (e.clientY - dragState.y) * 0.0012));
     });
     stageEl.addEventListener("pointerup", (e) => {
       if (dragState) {
@@ -459,7 +592,7 @@
       ndc.x = ((clientX - rect.left) / rect.width) * 2 - 1;
       ndc.y = -((clientY - rect.top) / rect.height) * 2 + 1;
       raycaster.setFromCamera(ndc, camera);
-      return raycaster.intersectObjects(helixMeshes).length > 0;
+      return raycaster.intersectObjects(curHelix()).length > 0;
     }
     stageEl.addEventListener("mousemove", (e) => {
       mouse.vx = e.clientX; mouse.vy = e.clientY; mouse.in = true;
@@ -479,6 +612,10 @@
       selectedId = null;
       focusPanelEl.classList.add("open");
       renderFocusPanel();
+      document.getElementById("verSwitch").addEventListener("click", (e) => {
+        const v = e.target && e.target.dataset ? parseInt(e.target.dataset.v, 10) : 0;
+        if (v === 1 || v === 2) setVersion(v);
+      });
       requestAnimationFrame(tick);
     }
     init();
